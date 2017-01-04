@@ -7,4 +7,16 @@
   <h3> {{ $hotel->TelephoneNumber}}</h3>
 
 
+  <h1>Reviews:</h1>
+  <ul>
+
+
+  @foreach ($hotel->reviews as $review)
+    <li>
+
+      {{$review->comment}}
+    </li>
+
+  @endforeach
+</ul>
 @endsection
