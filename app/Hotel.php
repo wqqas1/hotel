@@ -11,4 +11,10 @@ class Hotel extends Model
       return $this->hasMany(Review::class);
 
       }
+
+      public function addReview(Review $review) {
+
+          return $this->reviews()->save($review);
+
+         }
 }
