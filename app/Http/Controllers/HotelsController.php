@@ -14,8 +14,12 @@ class HotelsController extends Controller
 
       public function show(Hotel $hotel) {
 
-          $hotel->load('reviews.user');
-          
+        //$hotel->load('reviews.user');
+        // $review = Hotel::with('reviews.user')->get();
+        $hotel->load('reviews.user');
+
+
+
           return view('hotels.hoteldetails', compact('hotel'));
 
        }

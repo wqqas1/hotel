@@ -14,7 +14,9 @@ class ReviewsController extends Controller
     //  $review = new Review;
     //  $review->comment = $request->comment;
     //  $hotel->reviews()->save($review);
-
+    $this->validate($request, [
+      'comment' => 'required|min:4'
+    ]);
     $review = new Review($request->all());
     $review->user_id = Auth::id();
 
@@ -24,14 +26,16 @@ class ReviewsController extends Controller
        }
 
        public function edit(Review $review) {
-         
+
          return view('reviews.edit', compact('review'));
 
 
          }
 
          public function update(Request $request, Review $review) {
-
+           $this->validate($request, [
+             'comment' => 'required|min:4'
+           ]);
            $review->update($request->all());
            return back();
 

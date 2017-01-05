@@ -42,6 +42,7 @@
 
 
   @foreach ($hotel->reviews as $review)
+    
     <tr>
       <td><a class="" href="#">{{$review->user->name}}:</a></td>
       <td>{{$review->comment}}</td>
@@ -68,7 +69,7 @@
   <div class="form-group">
 
 
-    <textarea name="comment" class="form-control"></textarea>
+    <textarea name="comment" class="form-control">{{ old('comment')}}</textarea>
     </div>
     <div class="form-group">
 
@@ -76,6 +77,21 @@
       <button type="submit" class="btn btn-primary">Add Review</button>
       </div>
 </form>
+  @if (count($errors))
+    <ul>
+      @foreach ($errors->all() as $error)
+      <div class="list-group">
+
+
+        <li class="list-group-item list-group-item-action list-group-item-danger">
+          {{$error}}
+        </li>
+
+
+      @endforeach
+    </ul>
+  </div>
+  @endif
 </div>
 </div>
 

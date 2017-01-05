@@ -1,8 +1,10 @@
-@if ($review->user_id == Auth::id())
-  @extends('layouts.app')
+
+@extends('layouts.app')
 
 
 @section('content')
+@if ($review->user_id == Auth::id())
+
 
   <h1>Edit a Review:</h1>
 
@@ -20,7 +22,23 @@
         <button type="submit" class="btn btn-primary">Edit Review</button>
         </div>
   </form>
-@endsection
+
   @else <h1>Unauthorised Access , You cannot edit this comment!</h1>
 
 @endif
+@if (count($errors))
+  <ul>
+    @foreach ($errors->all() as $error)
+    <div class="list-group">
+
+
+      <li class="list-group-item list-group-item-action list-group-item-danger">
+        {{$error}}
+      </li>
+
+
+    @endforeach
+  </ul>
+</div>
+@endif
+@endsection
