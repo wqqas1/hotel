@@ -42,14 +42,18 @@
 
 
   @foreach ($hotel->reviews as $review)
-    
+
     <tr>
       <td><a class="" href="#">{{$review->user->name}}:</a></td>
       <td>{{$review->comment}}</td>
       @if ($review->user_id == Auth::id())
           <td><a class="btn btn-default pull-right" href="/reviews/{{$review->id}}/edit">Edit Review</a></td>
+          <td>
+
+          <a class="btn btn-danger pull-right" href="/reviews/{{$review->id}}/destroy">Delete Review</a></td>
 
       @else
+        <td></td>
         <td></td>
       @endif
 

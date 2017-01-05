@@ -16,6 +16,8 @@ Route::post('hotels/{hotel}/reviews', 'ReviewsController@store');
 //Edit a review.
 Route::get('/reviews/{review}/edit', 'ReviewsController@edit');
 Route::patch('reviews/{review}', 'ReviewsController@update');
+//Delete a review.
+Route::get('/reviews/{review}/destroy', 'ReviewsController@destroy');
 
 
 Route::get('/', function () {

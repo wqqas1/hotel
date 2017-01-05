@@ -40,4 +40,17 @@ class ReviewsController extends Controller
            return back();
 
             }
+
+            public function destroy(Request $request, Review $review) {
+          //    $review =  $review->id;
+          //    $review->delete();
+              $id = $review->id;
+              $review = $review->find($id);
+              $review->delete();
+
+            //  return $review;
+            //  $review = $review->find($id);
+              return back();
+
+                }
 }
