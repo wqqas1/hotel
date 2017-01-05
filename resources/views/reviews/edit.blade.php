@@ -1,5 +1,9 @@
-@extends('layouts.app')
+@if ($review->user_id == Auth::id())
+  @extends('layouts.app')
+
+
 @section('content')
+
   <h1>Edit a Review:</h1>
 
   <form method="POST" action="/reviews/{{$review->id}}">
@@ -17,3 +21,6 @@
         </div>
   </form>
 @endsection
+  @else <h1>Unauthorised Access , You cannot edit this comment!</h1>
+
+@endif

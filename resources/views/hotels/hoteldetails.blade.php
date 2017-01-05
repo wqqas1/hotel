@@ -45,7 +45,15 @@
     <tr>
       <td><a class="" href="#">{{$review->user->name}}:</a></td>
       <td>{{$review->comment}}</td>
-      <td><a class="btn btn-default pull-right" href="/reviews/{{$review->id}}/edit">Edit Review</a></td>
+      @if ($review->user_id == Auth::id())
+          <td><a class="btn btn-default pull-right" href="/reviews/{{$review->id}}/edit">Edit Review</a></td>
+
+      @else
+        <td></td>
+      @endif
+
+
+
 
     </tr>
 
