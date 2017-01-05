@@ -7,3 +7,9 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.card {
+  max-width: 319px;
+  float: left;
+  margin-right: 10px;
+}

@@ -1,2 +1,11 @@
 # husainpatel - U1456168
-V1
+Hotel Website.
+
+Features:
+-Login
+-Register
+-View Hotels
+-Add Review to Hotel
+-Edit the  Review
+-Delete the Review
+-View all Reviews about a specific Hotel.

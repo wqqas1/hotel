@@ -29,7 +29,7 @@
 <hr>
   <h2>Reviews:</h2>
 
-  <table class="table table-inverse">
+  <table class="table">
 
   <thead>
     <tr>

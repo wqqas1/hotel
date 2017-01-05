@@ -8,6 +8,7 @@ class HotelsController extends Controller
 {
     public function index() {
       $hotels = Hotel::all();
+      
       return view('hotels.allhotels' , compact('hotels'));
 
       }

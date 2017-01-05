@@ -7688,4 +7688,10 @@ button.close {
   }
 }
 
+.card {
+  max-width: 319px;
+  float: left;
+  margin-right: 10px;
+}
+
 /*# sourceMappingURL=app.css.map */
