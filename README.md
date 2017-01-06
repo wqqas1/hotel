@@ -9,3 +9,4 @@ Features:
 -Edit the  Review
 -Delete the Review
 -View all Reviews about a specific Hotel.
+-View Rooms Provided by a Hotel and the Rooms Details.

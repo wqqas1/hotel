@@ -25,6 +25,21 @@
       </p>
   </div>
 </div>
+<hr>
+    <h3>Rooms:</h3>
+
+
+
+    @foreach ($hotel->rooms as $room)
+
+
+      <h5><u> {{$room->RoomType}}</u></h5>
+      <p><mark>Max Occupants :</mark>  {{$room->Capacity}} People.  </p>
+      <p><mark>Beds Provided :</mark> {{$room->BedOption}}.  </p>
+      <p><mark>View :</mark> {{$room->View}}.  </p>
+      <p><mark>Price :</mark> £{{$room->Price}}  </p>
+
+    @endforeach
 
 <hr>
   <h2>Reviews:</h2>
