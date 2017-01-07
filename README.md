@@ -2,14 +2,15 @@
 Hotel Website.
 
 Features:
--Login
--Register
--View Hotels
--Add Review to Hotel
--Edit the  Review
--Delete the Review
+-Login.
+-Register.
+-View Hotels.
+-Add Review to Hotel.
+-Edit the  Review.
+-Delete the Review.
 -View all Reviews about a specific Hotel.
 -View Rooms Provided by a Hotel and the Rooms Details.
+-Ability to Edit a Room.
 
 In development: 
 - Partners

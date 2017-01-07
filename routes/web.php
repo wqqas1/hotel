@@ -47,6 +47,10 @@ Route::patch('yourhotels/edit/{hotel}', 'HotelsController@update');
 //Add a new Room to a hotel
 
 Route::post('yourhotels/{hotel}/rooms', 'RoomsController@store');
+// Edit a rooms
+
+Route::get('/rooms/{room}/edit', 'RoomsController@edit');
+Route::patch('/rooms/{room}/edit', 'RoomsController@update');
 
 //Added For Authentication
 

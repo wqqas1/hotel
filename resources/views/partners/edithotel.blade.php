@@ -81,7 +81,7 @@
       <td><a class="" href="#">{{$room->RoomType}}:</a></td>
       <td></td>
 
-          <td><a class="btn btn-default pull-right" href="/{{$room->type}}/{{$room->id}}/edit">Edit Room</a></td>
+          <td><a class="btn btn-default pull-right" href="/rooms/{{$room->id}}/edit">Edit Room</a></td>
           <td>
 
           <a class="btn btn-danger pull-right" href="/reviews/{{$room->id}}/destroy">Delete Room</a></td>
@@ -141,7 +141,7 @@
 
 </form>
 <!-- End Adding a New room -->
-  
+
 </div>
 </div>
 
