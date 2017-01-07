@@ -29,4 +29,16 @@ class RoomsController extends Controller
 
           }
 
+          public function destroy(Request $request, Room $room) {
+
+            $id = $room->id;
+            $room = $room->find($id);
+            $room->delete();
+
+          //  return $review;
+          //  $review = $review->find($id);
+            return back();
+
+              }
+
 }

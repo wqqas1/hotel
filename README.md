@@ -11,7 +11,7 @@ Features:
 -View all Reviews about a specific Hotel.
 -View Rooms Provided by a Hotel and the Rooms Details.
 -Ability to Edit a Room.
-
+-Ability to Delete a Room.
 In development: 
 - Partners
 Partners can sign up and list their hotels on the website.

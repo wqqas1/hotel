@@ -50,7 +50,13 @@ Route::post('yourhotels/{hotel}/rooms', 'RoomsController@store');
 // Edit a rooms
 
 Route::get('/rooms/{room}/edit', 'RoomsController@edit');
+// Update a room
 Route::patch('/rooms/{room}/edit', 'RoomsController@update');
+
+// Delete a room
+
+Route::get('/rooms/{room}/destroy', 'RoomsController@destroy');
+
 
 //Added For Authentication
 

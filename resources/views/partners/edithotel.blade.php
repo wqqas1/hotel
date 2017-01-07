@@ -84,7 +84,7 @@
           <td><a class="btn btn-default pull-right" href="/rooms/{{$room->id}}/edit">Edit Room</a></td>
           <td>
 
-          <a class="btn btn-danger pull-right" href="/reviews/{{$room->id}}/destroy">Delete Room</a></td>
+          <a class="btn btn-danger pull-right" href="/rooms/{{$room->id}}/destroy">Delete Room</a></td>
 
 
 
