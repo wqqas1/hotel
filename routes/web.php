@@ -8,6 +8,7 @@
 //Route to display hotels.
 Route::get('hotels', 'HotelsController@index');
 
+
 //Display specific hotel.
 Route::get('hotels/{hotel}', 'HotelsController@show');
 //post a reviews.
@@ -25,6 +26,27 @@ Route::get('/', function () {
 });
 
 
+
+
+//Show the New Hotel Page.
+Route::get('partners/newhotel', function () {
+    return view('partners.addhotel');
+});
+
+// Add a New Hotel.
+Route::post('partners/hotels/add', 'HotelsController@store');
+
+
+
+//Show all the hotels that a partner has listed
+Route::get('partners/yourhotels', 'HotelsController@ShowHotelsByPartner');
+// Edit a specific hotels details.
+Route::get('yourhotels/edit/{hotel}', 'HotelsController@edit');
+//Update a specific hotels details.
+Route::patch('yourhotels/edit/{hotel}', 'HotelsController@update');
+//Add a new Room to a hotel
+
+Route::post('yourhotels/{hotel}/rooms', 'RoomsController@store');
 
 //Added For Authentication
 

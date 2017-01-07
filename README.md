@@ -10,3 +10,13 @@ Features:
 -Delete the Review
 -View all Reviews about a specific Hotel.
 -View Rooms Provided by a Hotel and the Rooms Details.
+
+In development: 
+- Partners
+Partners can sign up and list their hotels on the website.
+
+- rooms
+
+Each hotel has many room choices with differences in max occupents , beds provided , views and prices.
+
+The ability to Add and  Edit Hotels has been Implemented and along with this the ability to Add a room to a Hotel.
