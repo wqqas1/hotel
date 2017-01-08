@@ -30,4 +30,11 @@ class Hotel extends Model
               return $this->rooms()->save($room);
 
              }
+
+             public function role() {
+
+
+               return $this->hasOne(Role::class);
+
+             }
 }
