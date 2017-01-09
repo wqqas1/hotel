@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+Use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -14,9 +14,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['name', 'email', 'password'];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,4 +31,18 @@ class User extends Authenticatable
       return $this->belongsTo(Role::class);
 
       }
+      public function proposals() {
+
+        return $this->hasOne(Proposal::class);
+
+        }
+        public function addProposal(Proposal $proposal) {
+
+            return $this->proposals()->save($proposal);
+
+          }
+
+
+
+
 }

@@ -58,6 +58,20 @@ Route::patch('/rooms/{room}/edit', 'RoomsController@update');
 Route::get('/rooms/{room}/destroy', 'RoomsController@destroy');
 
 
+
+
+//Admins Routes
+Route::get('partner/requests', 'ProposalController@show');
+
+Route::get('/proposal/{proposal}/destroy', 'ProposalController@destroy');
+
+Route::get('/proposal/{proposal}/accept', 'HomeController@update');
+
+// User Routes
+
+Route::get('partner/apply', 'ProposalController@index');
+
+Route::post('/proposal/{user}/new', 'ProposalController@store');
 //Added For Authentication
 
 Auth::routes();

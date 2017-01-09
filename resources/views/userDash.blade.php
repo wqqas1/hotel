@@ -14,10 +14,15 @@
                     You are logged in! {{$usersrole->RoleName}}
                 </div>
             </div>
+            <a href="partner/apply">Become a Partner Now!</a>
         </div>
+
     </div>
+
 </div>
+
 @endsection
+
 
 @else
   <h1> No Way.</h1>
