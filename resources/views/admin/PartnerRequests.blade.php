@@ -21,12 +21,12 @@
     @foreach ($proposals as $proposal)
 
       <tr>
-        <td><a class="" href="#">{{$proposal->CompanyName}} , {{$proposal->id}} :</a></td>
+        <td><a class="" href="#">{{$proposal->CompanyName}}</a></td>
         <td>{{$proposal->CompanyEmail}}</td>
         <td>{{$proposal->HQAddress}}</td>
         <td>{{$proposal->Vision}}</td>
 
-            <td><a class="btn btn-default pull-right" href="/proposal/{{$proposal->id}}/accept">Accept</a></td>
+            <td><a class="btn btn-success pull-right" href="/proposal/{{$proposal->id}}/accept">Accept</a></td>
             <td>
 
             <a class="btn btn-danger pull-right" href="/proposal/{{$proposal->id}}/destroy">Refuse</a></td>
@@ -42,7 +42,7 @@
   </tbody>
   </table>
 
-  <a href="/home">Back to Dashboard.</a>
+  <a href="/home" class="btn btn-info">Back to Dashboard.</a>
 
 
 

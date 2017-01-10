@@ -10,9 +10,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
+
+
                 <div class="panel-body">
-                    You are logged in! {{$usersrole->RoleName}}
-                </div>
+                    <div class="list-group">
+                      <a href="/partners/yourhotels" class="list-group-item">Your Hotels</a>
+                      <a href="/partners/newhotel" class="list-group-item">List a New Hotel</a>
+                    </div>
+                  </div>
+                  <div class="panel-footel text-center">
+                    Welcome {{$usersrole->RoleName}} - You are logged in!  </div>
             </div>
         </div>
     </div>
