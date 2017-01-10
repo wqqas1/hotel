@@ -44,5 +44,16 @@ class User extends Authenticatable
 
 
 
+          public function partners() {
+
+            return $this->hasOne(Partner::class);
+
+            }
+
+            public function addPartner(Partner $partner) {
+
+              return  $this->partners()->save($partner);
+            }
+
 
 }

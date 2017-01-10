@@ -67,6 +67,12 @@ Route::get('/proposal/{proposal}/destroy', 'ProposalController@destroy');
 
 Route::get('/proposal/{proposal}/accept', 'HomeController@update');
 
+Route::get('partner/list', 'PartnerController@index');
+
+
+
+Route::get('/partners/{partner}/destroy', 'PartnerController@destroy');
+
 // User Routes
 
 Route::get('partner/apply', 'ProposalController@index');

@@ -9,7 +9,7 @@
                 <div class="list-group">
 
                 <a href="partner/requests" class="list-group-item ">Partner Requests</a>
-
+                <a href="partner/list" class="list-group-item ">View Partners</a>
 
               </div>
                 <div class="panel-body">

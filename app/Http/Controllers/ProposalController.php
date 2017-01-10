@@ -15,7 +15,7 @@ class ProposalController extends Controller
     $userid = Auth::id();
     $user = User::find($userid);
     $user->load('proposals');
-    
+
     return view('apply.becomePartner',compact('user'));
 
 
