@@ -14,7 +14,20 @@
                     You are logged in! {{$usersrole->RoleName}}
                 </div>
             </div>
-            <a href="partner/apply">Become a Partner Now!</a>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Want to Partner with Check-in.com?</div>
+
+                <div class="panel-body">
+                  <div class="list-group">
+                    <a href="partner/apply" class="list-group-item">Become a Partner Now!</a>
+                    <a href="partner/{{Auth::id()}}/status" class="list-group-item">Check your proposal status</a>
+                  </div>
+
+                </div>
+            </div>
+
+
         </div>
 
     </div>

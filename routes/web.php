@@ -70,7 +70,7 @@ Route::get('/proposal/{proposal}/accept', 'HomeController@update');
 // User Routes
 
 Route::get('partner/apply', 'ProposalController@index');
-
+Route::get('partner/{user}/status', 'ProposalController@status');
 Route::post('/proposal/{user}/new', 'ProposalController@store');
 //Added For Authentication
 

@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
 
-  public function index() {
+  public function index(Proposal $proposal) {
 
 
     $userid = Auth::id();
-    return view('apply.becomePartner')->with('userid' , $userid);
+    $user = User::find($userid);
+    $user->load('proposals');
+    
+    return view('apply.becomePartner',compact('user'));
 
 
 
@@ -64,4 +67,15 @@ class ProposalController extends Controller
         return back();
 
           }
+
+          public function status(Proposal $proposal, user $user) {
+
+
+            $user->load('proposals');
+
+
+
+              return view('apply.status', compact('user'));
+
+            }
 }

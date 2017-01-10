@@ -52,6 +52,7 @@ class HomeController extends Controller
       $proposal= Proposal::find($id);
       $user = $proposal->User->id;
       User::where('id',$user)->update(array('role_id'=>'1'));
+      $proposal->delete();
       return back();
 
     }

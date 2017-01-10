@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-
+@if (is_null($user->proposals))
   <h3>Partner with Check-In.com</h3>
-  <form method="POST" action="/proposal/{{$userid}}/new">
+  <form method="POST" action="/proposal/{{$user->id}}/new">
     {{ csrf_field()}}
 
     <div class="form-group row">
@@ -34,9 +34,12 @@
 
       <button type="submit" class="btn btn-primary">Join</button>
   </form>
+@else
+  <p>
+    You already have a pending proposal.
+  </p>
 
-
-
+@endif
 
 
 
