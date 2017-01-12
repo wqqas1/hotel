@@ -7,7 +7,9 @@
 
   <div class="page-header">
 
-      <h1> {{ $hotel->Name}}</h1>
+      <h1> {{ $hotel->Name}} <small class="text-muted">- <u>{{$hotel->partner->CompanyName}}</u></small>
+
+      </h1>
       <small>{{ $hotel->Country}} |  {{ $hotel->City}}</small>
   </div>
 <div class= "panel panel-primary">

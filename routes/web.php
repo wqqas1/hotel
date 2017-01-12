@@ -29,17 +29,15 @@ Route::get('/', function () {
 
 
 //Show the New Hotel Page.
-Route::get('partners/newhotel', function () {
-    return view('partners.addhotel');
-});
 
+Route::get('partners/{partner}/newhotel', 'PartnerController@addHotel');
 // Add a New Hotel.
-Route::post('partners/hotels/add', 'HotelsController@store');
+Route::post('hotels/{partner}/add', 'HotelsController@store');
 
 
 
 //Show all the hotels that a partner has listed
-Route::get('partners/yourhotels', 'HotelsController@ShowHotelsByPartner');
+Route::get('partners/{partner}/yourhotels', 'HotelsController@ShowHotelsByPartner');
 // Edit a specific hotels details.
 Route::get('yourhotels/edit/{hotel}', 'HotelsController@edit');
 //Update a specific hotels details.

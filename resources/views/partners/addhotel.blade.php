@@ -2,7 +2,7 @@
 @section('content')
 
   <h3>Add a Hotel</h3>
-  <form method="POST" action="hotels/add">
+  <form method="POST" action="/hotels/{{$partner->id}}/add">
     {{ csrf_field()}}
     <div class="form-group row">
       <label for="namebox" class="col-2 col-form-label">Hotel Name:</label>

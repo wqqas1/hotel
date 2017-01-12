@@ -30,6 +30,7 @@ class HomeController extends Controller
         $id = Auth::user()->id;
         $currentuser = User::find($id);
         $usersrole = $currentuser->role;
+        $partner = $currentuser->partners;
         $roleid = $usersrole->id;
         if ($roleid == 2) {
 
@@ -39,7 +40,7 @@ class HomeController extends Controller
           return view('admin.adminDash', compact('usersrole'));
         }
         else if ($roleid == 1) {
-          return view('partners.partnerDash', compact('usersrole'));
+          return view('partners.partnerDash', compact('usersrole','partner'));
         }
         else {
             return view('auth.login');

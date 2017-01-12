@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 Use App\Hotel;
+Use App\Partner;
 use Illuminate\Http\Request;
 
 class HotelsController extends Controller
@@ -33,7 +34,7 @@ class HotelsController extends Controller
 
       //      }
 
-            public function store(Request $request, Hotel $hotel) {
+            public function store(Request $request, Hotel $hotel ,Partner $partner) {
 
 
 
@@ -45,14 +46,15 @@ class HotelsController extends Controller
             $hotel->TelephoneNumber = $request->TelephoneNumber;
             $hotel->ImagePath = $request->ImagePath;
             $hotel->description = $request->description;
-            $hotel->save();
+
+            $partner->hotels()->save($hotel);
             return back();
 
                }
 
-               public function ShowHotelsByPartner(Hotel $hotel) {
+               public function ShowHotelsByPartner(Hotel $hotel, Partner $partner) {
 
-                 $hotels = Hotel::all();
+                 $hotels = $partner->hotels;
 
                  return view('partners.showhotel', compact('hotels'));
 

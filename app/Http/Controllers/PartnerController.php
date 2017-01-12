@@ -19,6 +19,12 @@ class PartnerController extends Controller
 
        }
 
+       public function addHotel(Partner $partner) {
+
+            
+                return view('partners.addhotel' , compact('partner'));
+         }
+
        public function destroy(Partner $partner ,  User $user) {
 
 

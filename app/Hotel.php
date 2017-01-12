@@ -8,6 +8,12 @@ class Hotel extends Model
 {
   protected $fillable = ['Name','Address','City','Country','TelephoneNumber','description','ImagePath'];
 
+
+  public function partner() {
+
+      return $this->belongsTo(Partner::class);
+
+    }
     public function reviews() {
 
       return $this->hasMany(Review::class);

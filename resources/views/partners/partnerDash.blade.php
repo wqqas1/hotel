@@ -14,12 +14,12 @@
 
                 <div class="panel-body">
                     <div class="list-group">
-                      <a href="/partners/yourhotels" class="list-group-item">Your Hotels</a>
-                      <a href="/partners/newhotel" class="list-group-item">List a New Hotel</a>
+                      <a href="/partners/{{$partner->id}}/yourhotels" class="list-group-item">Your Hotels</a>
+                      <a href="/partners/{{$partner->id}}/newhotel" class="list-group-item">List a New Hotel</a>
                     </div>
                   </div>
                   <div class="panel-footel text-center">
-                    Welcome {{$usersrole->RoleName}} - You are logged in!  </div>
+                    Welcome {{$usersrole->RoleName}} - {{$partner->CompanyName}} You are logged in!  </div>
             </div>
         </div>
     </div>
