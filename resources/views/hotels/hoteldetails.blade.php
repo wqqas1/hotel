@@ -7,9 +7,9 @@
 
   <div class="page-header">
 
-      <h1> {{ $hotel->Name}} <small class="text-muted">- <u>{{$hotel->partner->CompanyName}}</u></small>
+      <h2> {{ $hotel->Name}} <small class="text-muted">- <u>{{$hotel->partner->CompanyName}}</u></small>
 
-      </h1>
+      </h2>
       <small>{{ $hotel->Country}} |  {{ $hotel->City}}</small>
   </div>
 <div class= "panel panel-primary">
@@ -28,7 +28,7 @@
   </div>
 </div>
 <hr>
-    <h3>Rooms:</h3>
+    <h4>Rooms:</h4>
 
 
 
@@ -44,7 +44,7 @@
     @endforeach
 
 <hr>
-  <h2>Reviews:</h2>
+  <h4>Reviews:</h4>
 
   <table class="table">
 
@@ -83,7 +83,7 @@
 </tbody>
 </table>
 <hr>
-<h3>Add a New Review</h3>
+<h4>Add a New Review</h4>
 <form method="POST" action="/hotels/{{$hotel->id}}/reviews">
   {{ csrf_field()}}
 

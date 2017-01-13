@@ -2,6 +2,7 @@
 @section('content')
 
   <h3>Add a Hotel</h3>
+
   <form method="POST" action="/hotels/{{$partner->id}}/add">
     {{ csrf_field()}}
     <div class="form-group row">
@@ -54,6 +55,7 @@
       </div></div>
 
       <button type="submit" class="btn btn-primary">Add Hotel</button>
+      <a class="btn btn-default pull-right" href="/home">Back</a>
   </form>
 
 
