@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+Use Auth;
 Use App\Hotel;
 Use App\Partner;
+Use App\Room;
 use Illuminate\Http\Request;
 
 class HotelsController extends Controller
@@ -60,9 +62,11 @@ class HotelsController extends Controller
 
 
                  }
-                 public function edit(Hotel $hotel) {
+                 public function edit(Hotel $hotel, Partner $partner) {
+                   $partner = $hotel->partner;
 
-                   return view('partners.edithotel', compact('hotel'));
+
+                   return view('partners.edithotel', compact('hotel','partner'));
 
 
                    }
@@ -73,6 +77,18 @@ class HotelsController extends Controller
                    return back();
 
                     }
+
+                    public function destroy(Request $request,Hotel $hotel) {
+
+
+                        $id = $hotel->id;
+                        $currenthotel = Hotel::find($id);
+
+                        $currenthotel->rooms()->delete();
+                        $currenthotel->delete();
+                        return redirect('/home');
+
+                     }
 
 
 }

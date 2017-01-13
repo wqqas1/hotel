@@ -56,8 +56,9 @@ Route::patch('/rooms/{room}/edit', 'RoomsController@update');
 Route::get('/rooms/{room}/destroy', 'RoomsController@destroy');
 
 
+//delete a hotel
 
-
+Route::get('/yourhotels/destroy/{hotel}', 'HotelsController@destroy');
 //Admins Routes
 Route::get('partner/requests', 'ProposalController@show');
 

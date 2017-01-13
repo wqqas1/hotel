@@ -2,7 +2,7 @@
 @section('content')
 
 
-<h3>Edit a Hotel<a class="btn btn-default pull-right" href="/partners/yourhotels">Back</a></h3>
+<h3>Edit a Hotel<a class="btn btn-default pull-right" href="/partners/{{$partner->id}}/yourhotels">Back</a></h3>
 <form method="POST" action="/yourhotels/edit/{{$hotel->id}}">
   {{ csrf_field()}}
   {{ method_field('PATCH')}}
@@ -56,7 +56,7 @@
     </div></div>
 
     <button type="submit" class="btn btn-primary">Edit Hotel</button>
-
+      <a class="btn btn btn-danger pull-right" href="/yourhotels/destroy/{{$hotel->id}}">Remove</a>
 </form>
 <hr>
 
