@@ -34,7 +34,6 @@ Route::get('partners/{partner}/newhotel', 'PartnerController@addHotel');
 // Add a New Hotel.
 Route::post('hotels/{partner}/add', 'HotelsController@store');
 
-Route::post('{hotel}/photos', 'HotelsController@addphoto');
 
 
 //Show all the hotels that a partner has listed
@@ -52,6 +51,12 @@ Route::get('/rooms/{room}/edit', 'RoomsController@edit');
 // Update a room
 Route::patch('/rooms/{room}/edit', 'RoomsController@update');
 
+
+//add new photos
+Route::get('{hotel}/photos', 'HotelPhotosController@uploadPhoto');
+Route::post('{hotel}/photos', 'HotelPhotosController@addphoto');
+//delete photo
+Route::get('{hotel}/{hotelphoto}/destroy', 'HotelPhotosController@destroy');
 // Delete a room
 
 Route::get('/rooms/{room}/destroy', 'RoomsController@destroy');

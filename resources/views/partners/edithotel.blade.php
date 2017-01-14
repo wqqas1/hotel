@@ -143,6 +143,17 @@
 
 </form>
 <!-- End Adding a New room -->
+<!-- Add Photos -->
+<hr>
+<h1>Photos:</h1>
+@foreach ($hotel->photos as $photo)
+  <img class="img-thumbnail"src="{{$photo->path}}" />
+  <a class="btn btn btn-danger pull-right text-center" href="/{{$hotel->id}}/{{$photo->id}}/destroy">Delete</a>
+
+@endforeach
+  <hr />
+  <a href="/{{$hotel->id}}/photos" class="btn btn-primary">Add Images</a>
+
 
 </div>
 </div>

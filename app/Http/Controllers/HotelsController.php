@@ -30,9 +30,10 @@ class HotelsController extends Controller
         // $review = Hotel::with('reviews.user')->get();
         $hotel->load('reviews.user');
 
+        $photos = $hotel->photos->shift();
 
 
-          return view('hotels.hoteldetails', compact('hotel'));
+          return view('hotels.hoteldetails', compact('hotel','photos'));
 
        }
 
@@ -84,8 +85,8 @@ class HotelsController extends Controller
                  public function edit(Hotel $hotel, Partner $partner) {
                    $partner = $hotel->partner;
 
-
-                   return view('partners.edithotel', compact('hotel','partner'));
+                     $photos = $hotel->photos->shift();
+                   return view('partners.edithotel', compact('hotel','partner','photos'));
 
 
                    }
@@ -116,16 +117,7 @@ class HotelsController extends Controller
                         return redirect('/home');
 
                      }
-                     public function addphoto(Request $request , Hotel $hotel) {
+                
 
-
-                        $file=$request->file('file');
-                        $name = time() . $file->getClientOriginalName();
-                        $file->move('hotelphotos/photos', $name);
-
-
-                        $hotel->photos()->create(['path'=>"/hotelphotos/photos/{$name}"]);
-
-                     }
 
 }

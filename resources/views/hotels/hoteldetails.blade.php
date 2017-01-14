@@ -12,11 +12,15 @@
       </h2>
       <small>{{ $hotel->Country}} |  {{ $hotel->City}}</small>
   </div>
-  <div class="photos">
-    @foreach ($hotel->photos as $photo)
-    <center><img  src="{{$photo->path}}"></center>
-    @endforeach
-  </div>
+
+<center>
+
+<div class="autoplay">
+  @foreach ($hotel->photos as $photo)
+  <div><img  src="{{$photo->path}}"></div>
+  @endforeach
+</div>
+  </center>
   <hr>
 <div class= "panel panel-primary">
   <div class = "panel-heading">
@@ -123,5 +127,25 @@
   @endif
 </div>
 </div>
+
+@endsection
+@section('scripts')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+  <script>
+
+      $('.autoplay').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2500,
+        arrows:false,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear'
+
+      });
+
+  </script>
 
 @endsection
