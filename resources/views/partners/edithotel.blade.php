@@ -3,7 +3,7 @@
 
 
 <h3>Edit a Hotel<a class="btn btn-default pull-right" href="/partners/{{$partner->id}}/yourhotels">Back</a></h3>
-<form method="POST" action="/yourhotels/edit/{{$hotel->id}}">
+<form method="POST" action="/yourhotels/edit/{{$hotel->id}}" enctype="multipart/form-data">
   {{ csrf_field()}}
   {{ method_field('PATCH')}}
   <div class="form-group row">
@@ -42,10 +42,12 @@
         <input class="form-control" name="TelephoneNumber" type="text" value="{{$hotel->TelephoneNumber}}" id="Telbox">
     </div></div>
     <div class="form-group row">
-      <label for="imagebox" class="col-2 col-form-label">Image:</label>
+        <input type="hidden" value="imag.jpg" name="ImagePath" />
+      <label for="imagebox" class="col-2 col-form-label">Thumbnail:</label>
+        <p>Current Thumbnail: {{$hotel->thumbnail->path}}</p>
       <div class="col-10">
 
-        <input class="form-control" name="ImagePath" type="text" value="{{$hotel->ImagePath}}" id="imagebox">
+        <input  name="displaypic" type="file" value="{{$hotel->thumbnail->path}}" id="imagebox">
     </div></div>
 
     <div class="form-group row">

@@ -12,10 +12,17 @@
       </h2>
       <small>{{ $hotel->Country}} |  {{ $hotel->City}}</small>
   </div>
+  <div class="photos">
+    @foreach ($hotel->photos as $photo)
+    <center><img  src="{{$photo->path}}"></center>
+    @endforeach
+  </div>
+  <hr>
 <div class= "panel panel-primary">
   <div class = "panel-heading">
     <h3 class="panel-title">Hotel Details:</h3>
   </div>
+
   <div class="panel panel-body">
     <h4>Address:</h4>
       <p>
@@ -27,6 +34,7 @@
       </p>
   </div>
 </div>
+
 <hr>
     <h4>Rooms:</h4>
 

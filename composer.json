@@ -47,5 +47,9 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "load": {
+      "files":["app/helpers.php"]
     }
+
 }

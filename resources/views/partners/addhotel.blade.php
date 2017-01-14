@@ -3,7 +3,8 @@
 
   <h3>Add a Hotel</h3>
 
-  <form method="POST" action="/hotels/{{$partner->id}}/add">
+  <form method="POST"  action="/hotels/{{$partner->id}}/add" enctype="multipart/form-data">
+
     {{ csrf_field()}}
     <div class="form-group row">
       <label for="namebox" class="col-2 col-form-label">Hotel Name:</label>
@@ -41,10 +42,10 @@
           <input class="form-control" name="TelephoneNumber" type="text" value="" id="Telbox">
       </div></div>
       <div class="form-group row">
-        <label for="imagebox" class="col-2 col-form-label">Image:</label>
+        <label for="imagebox" class="col-2 col-form-label">Thumbnail (required):</label>
         <div class="col-10">
-
-          <input class="form-control" name="ImagePath" type="text" value="image.jpg" id="imagebox">
+          <input type="hidden" value="imag.jpg" name="ImagePath" />
+          <input type="file"  name="displaypic"  id="imagebox" required>
       </div></div>
 
       <div class="form-group row">

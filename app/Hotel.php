@@ -43,4 +43,15 @@ class Hotel extends Model
                return $this->hasOne(Role::class);
 
              }
+
+             public function photos() {
+
+                return $this->hasMany(HotelPhoto::class);
+
+                  }
+                  public function thumbnail() {
+
+                      return $this->hasOne(HotelPhoto::class);
+
+                     }
 }

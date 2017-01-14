@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ elixir('css/app.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -86,5 +86,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    @yield('scripts')
 </body>
 </html>

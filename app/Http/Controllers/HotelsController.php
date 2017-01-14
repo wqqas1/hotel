@@ -11,6 +11,14 @@ class HotelsController extends Controller
 {
     public function index() {
       $hotels = Hotel::all();
+      $hotels->load('thumbnail');
+
+
+//      $hotels= Hotel::with('thumbnail');
+
+
+
+
 
       return view('hotels.allhotels' , compact('hotels'));
 
@@ -50,7 +58,18 @@ class HotelsController extends Controller
             $hotel->description = $request->description;
 
             $partner->hotels()->save($hotel);
-            return back();
+            $hotelid = $hotel->id;
+            $currenthotel = Hotel::find($hotelid);
+
+            $file=$request->file('displaypic');
+
+
+            $name = time() . $file->getClientOriginalName();
+            $file->move('hotelphotos/photos', $name);
+
+
+            $hotel->photos()->create(['path'=>"/hotelphotos/photos/{$name}"]);
+            return view('partners.hotels.addphoto', compact('currenthotel','partner'));
 
                }
 
@@ -74,6 +93,14 @@ class HotelsController extends Controller
                  public function update(Request $request, Hotel $hotel) {
 
                    $hotel->update($request->all());
+                   $file=$request->file('displaypic');
+
+
+                   $name = time() . $file->getClientOriginalName();
+                   $file->move('hotelphotos/photos', $name);
+                   $thumbnail = $hotel->thumbnail;
+                   $thumbnail->path = "/hotelphotos/photos/{$name}";
+                   $thumbnail->save();
                    return back();
 
                     }
@@ -89,6 +116,16 @@ class HotelsController extends Controller
                         return redirect('/home');
 
                      }
+                     public function addphoto(Request $request , Hotel $hotel) {
 
+
+                        $file=$request->file('file');
+                        $name = time() . $file->getClientOriginalName();
+                        $file->move('hotelphotos/photos', $name);
+
+
+                        $hotel->photos()->create(['path'=>"/hotelphotos/photos/{$name}"]);
+
+                     }
 
 }

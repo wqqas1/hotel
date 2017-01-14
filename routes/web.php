@@ -34,6 +34,7 @@ Route::get('partners/{partner}/newhotel', 'PartnerController@addHotel');
 // Add a New Hotel.
 Route::post('hotels/{partner}/add', 'HotelsController@store');
 
+Route::post('{hotel}/photos', 'HotelsController@addphoto');
 
 
 //Show all the hotels that a partner has listed

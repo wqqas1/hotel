@@ -8,9 +8,11 @@
       </div>
 
   @foreach ($hotels as $hotel)
-
+    
     <div class="card">
-      <img class="card-img-top" src="images/{{$hotel->ImagePath}}" alt="Card image">
+
+      <img class="card-img-top" src="{{$hotel->thumbnail->path}}" alt="Card image">
+
       <div class="card-block">
         <h4 class="card-Title">{{ $hotel->Name}}</h4>
       <p class ="card-text">{{$hotel->description}}</p>

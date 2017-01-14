@@ -22,3 +22,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(App\Hotel::class, function (Faker\Generator $faker) {
+
+
+    return [
+        'Name' => $faker->company,
+        'Address' => $faker->streetName,
+        'City' => $faker->country,
+        'Country' => $faker->name,
+        'TelephoneNumber' => $faker->phoneNumber,
+
+    ];
+});
