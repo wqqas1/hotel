@@ -25,8 +25,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
 
-
+Route::post('/search', 'HotelsController@index');
 
 //Show the New Hotel Page.
 
@@ -83,6 +86,11 @@ Route::get('/partners/{partner}/destroy', 'PartnerController@destroy');
 Route::get('partner/apply', 'ProposalController@index');
 Route::get('partner/{user}/status', 'ProposalController@status');
 Route::post('/proposal/{user}/new', 'ProposalController@store');
+
+
+// Make a booking
+
+Route::get('/book/{hotel}/{room}', 'ReservationController@index');
 //Added For Authentication
 
 Auth::routes();

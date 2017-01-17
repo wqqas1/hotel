@@ -6,12 +6,16 @@ Use App\Hotel;
 Use App\Partner;
 Use App\Room;
 use Illuminate\Http\Request;
-
+use App\Reservation;
 class HotelsController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
       $hotels = Hotel::all();
       $hotels->load('thumbnail');
+      $checkin = $request->CheckInDate;
+      $checkout= $request->CheckOutDate;
+      $request->session()->put('checkin',$checkin);
+      $request->session()->put('checkout',$checkout);
 
 
 //      $hotels= Hotel::with('thumbnail');
@@ -24,16 +28,49 @@ class HotelsController extends Controller
 
       }
 
-      public function show(Hotel $hotel) {
+      public function show(Hotel $hotel , Request $request) {
 
         //$hotel->load('reviews.user');
         // $review = Hotel::with('reviews.user')->get();
         $hotel->load('reviews.user');
 
         $photos = $hotel->photos->shift();
+        $load = $hotel->load('rooms.reservation');
+        $rooms = $hotel->rooms;
+        $first = $request->session()->get('checkin');
+
+        $sec = $request->session()->get('checkout');
+        foreach ($rooms as $room) {
+            $id =  $room->id;
+
+            $result = Reservation::where('room_id','=', $id)
+            ->where('CheckIn','>=',$first)
+            ->where('CheckOut','<=',$sec)
+          ->orWhere(function($query) use ($first,$id)
+          {
+            $query->where('room_id','=', $id)   //
+                  ->where('CheckIn','<=',$first)
+
+                  ->where('CheckOut','>=',$first);
+                })->count();
+          
+          //('CheckIn','<=',$first)->where('CheckOut','>=',$first)->count();
+            $roomsavailable = $room->TotalRooms;
+
+              $roomsleft =  $roomsavailable - $result;
+              $room->spaceleft = $roomsleft;
 
 
-          return view('hotels.hoteldetails', compact('hotel','photos'));
+
+
+        }
+
+
+
+
+
+
+         return view('hotels.hoteldetails', compact('hotel','photos'));
 
        }
 
@@ -117,7 +154,7 @@ class HotelsController extends Controller
                         return redirect('/home');
 
                      }
-                
+
 
 
 }

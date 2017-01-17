@@ -52,8 +52,17 @@
       <p><mark>Beds Provided :</mark> {{$room->BedOption}}.  </p>
       <p><mark>View :</mark> {{$room->View}}.  </p>
       <p><mark>Price :</mark> £{{$room->Price}}  </p>
+      <p>
+        <b>Rooms Left: </b>{{$room->spaceleft}}</p>
+        @if ($room->spaceleft > 0)
+
+          <a href="/book/{{$hotel->id}}/{{$room->id}}" class="btn btn-success">Book</a>
+          <hr />
+
+        @endif
 
     @endforeach
+
 
 <hr>
   <h4>Reviews:</h4>

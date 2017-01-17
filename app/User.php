@@ -54,6 +54,10 @@ class User extends Authenticatable
 
               return  $this->partners()->save($partner);
             }
+            public function reservation() {
 
+              return $this->hasMany(Reservation::class);
+
+            }
 
 }
