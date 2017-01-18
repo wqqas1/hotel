@@ -13,6 +13,7 @@
                 <div class="panel-body">
                   <div class="list-group">
                     <a href="/search" class="list-group-item">Make a Booking</a>
+                    <a href="/user/reservations" class="list-group-item">View Your Bookings</a>
                 </div>
             </div>
             <hr>

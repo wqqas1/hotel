@@ -42,7 +42,7 @@ class ReservationController extends Controller
      public function store(User $user, Hotel $hotel , Room $room,Request $request , Reservation $reservation, $first,$sec,$protectedCost) {
 
 
-  
+
 
         $uid = Auth::id();
         $user = User::find($uid);
@@ -68,4 +68,23 @@ class ReservationController extends Controller
 
 
      }
+     public function show(User $user, Reservation $reservation) {
+
+              $uid = Auth::id();
+              $user = User::find($uid);
+              $reservations = $user->reservations->sortBy('CheckIn');
+
+                      return view('myreservations', compact('reservations'));
+
+      }
+      public function destroy(Reservation $reservation) {
+
+        $id = $reservation->id;
+        $reservation = Reservation::find($id);
+
+        $reservation->delete();
+          return back();
+
+
+          }
 }
