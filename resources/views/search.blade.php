@@ -13,10 +13,9 @@
 
             {{ csrf_field()}}
           <div class="form-group">
-                <label for="checkin">Check-in Date</label>
-                <input class="date form-control" type="text" name="CheckInDate" id="checkin" placeholder="Select Date..">
-                <label for="checkout">Check-out Date</label>
-                <input class="date form-control" type="text" name="CheckOutDate" id="checkout" placeholder="Select Date..">
+                <label for="checkin">Please Select Your Check-In and Check-Out dates:</label>
+                <input class="date form-control" type="text" name="daterange" id="checkin"  placeholder="Select Date..">
+
                 <br />
                   <button type="submit" class="btn btn-primary">Search</button>
           </div>
@@ -36,8 +35,14 @@
   <script>
   flatpickr(".date", {
 	minDate: "today",
+  mode:"range",
 
 });
+
+
+
+
+
 
 </script>
 @endsection

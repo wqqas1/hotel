@@ -91,6 +91,10 @@ Route::post('/proposal/{user}/new', 'ProposalController@store');
 // Make a booking
 
 Route::get('/book/{hotel}/{room}', 'ReservationController@index');
+
+//confirm booking
+
+Route::post('/bookings/new/{room}/{first}/{sec}/{protectedCost}', 'ReservationController@store');
 //Added For Authentication
 
 Auth::routes();

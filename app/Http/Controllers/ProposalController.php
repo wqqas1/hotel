@@ -34,7 +34,7 @@ class ProposalController extends Controller
 
 
       $user->addProposal(
-
+    
         new Proposal($request->all())
 
       );

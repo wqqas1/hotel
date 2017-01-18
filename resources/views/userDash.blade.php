@@ -8,10 +8,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Dashboard  |   You are logged in! {{$usersrole->RoleName}}</div>
 
                 <div class="panel-body">
-                    You are logged in! {{$usersrole->RoleName}}
+                  <div class="list-group">
+                    <a href="/search" class="list-group-item">Make a Booking</a>
                 </div>
             </div>
             <hr>

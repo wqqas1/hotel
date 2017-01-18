@@ -5,6 +5,7 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="page-header">
           <h1>Check-In: <small>Make a Booking</small></h1>
+
       </div>
       <center>
 
@@ -36,10 +37,43 @@
   <b>Price Per Night:</b><p> £{{$room->Price}}.</p>
 
   <p> £{{$room->Price}} x {{$stayduration}} Nights </p>
-  <b class="lead">Total Price: <u>£{{$totalcost}}</u></b><h6>
+  <b class="lead">Total Price: <u>£{{$totalcost}}</u></b>
+  </center>
     <br />
-    <a href="#" class="btn btn-success">Book Now!</a>
-</center>
+    <hr />
+
+    <form method="POST"  action="/bookings/new/{{$room->id}}/{{$first}}/{{$sec}}/{{$protectedCost}}">
+
+      {{ csrf_field()}}
+
+
+      <center>
+
+
+          <div class="form-group row">
+
+              <div class="col-xs-6">
+                <label for="first">Guest First Name:</label>
+                <input class="form-control pull-left" name="firstname" id="first" type="text" required="First Name" />
+              </div>
+              <div class="col-xs-6">
+                <label for="first">Guest Last Name:</label>
+                <input class="form-control pull-right" name="lastname" id="last" type="text" required="Last Name" />
+              </div>
+
+
+
+              </div>
+
+              <hr />
+                    <button type="submit" class="btn btn-success">Book Now!</button>
+              </center>
+
+      </form>
+
+
+  </div>
+
 </div>
 </div>
 @endsection

@@ -54,6 +54,7 @@
       <p><mark>Price :</mark> £{{$room->Price}}  </p>
       <p>
         <b>Rooms Left: </b>{{$room->spaceleft}}</p>
+        
         @if ($room->spaceleft > 0)
 
           <a href="/book/{{$hotel->id}}/{{$room->id}}" class="btn btn-success">Book</a>

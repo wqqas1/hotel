@@ -12,8 +12,12 @@ class HotelsController extends Controller
     public function index(Request $request) {
       $hotels = Hotel::all();
       $hotels->load('thumbnail');
-      $checkin = $request->CheckInDate;
-      $checkout= $request->CheckOutDate;
+      $range = explode('to',$request->daterange);
+      $checkin = date('Y-m-d',strtotime($range[0]));
+      $checkout = date('Y-m-d',strtotime($range[1]));
+      
+    //  $checkin = $request->CheckInDate;
+    //  $checkout= $request->CheckOutDate;
       $request->session()->put('checkin',$checkin);
       $request->session()->put('checkout',$checkout);
 
@@ -52,8 +56,15 @@ class HotelsController extends Controller
                   ->where('CheckIn','<=',$first)
 
                   ->where('CheckOut','>=',$first);
-                })->count();
-          
+                })
+                ->orWhere(function($query2) use ($first,$sec,$id)
+                {
+                  $query2->where('room_id','=', $id)   //
+                        ->where('CheckIn','>=',$first)
+
+                        ->where('CheckIn','<=',$sec);
+                      })->count();
+
           //('CheckIn','<=',$first)->where('CheckOut','>=',$first)->count();
             $roomsavailable = $room->TotalRooms;
 
