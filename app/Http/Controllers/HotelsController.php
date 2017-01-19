@@ -9,28 +9,73 @@ use Illuminate\Http\Request;
 use App\Reservation;
 class HotelsController extends Controller
 {
-    public function index(Request $request) {
+  public function index(Request $request) {
+        $searchterm = $request->get('searchterm');
+        $numtravelers = $request->get('numtravelers');
+
+    if (empty($searchterm) && empty($numtravelers)) {
       $hotels = Hotel::all();
-      $hotels->load('thumbnail');
-      $range = explode('to',$request->daterange);
-      $checkin = date('Y-m-d',strtotime($range[0]));
-      $checkout = date('Y-m-d',strtotime($range[1]));
 
-    //  $checkin = $request->CheckInDate;
-    //  $checkout= $request->CheckOutDate;
-      $request->session()->put('checkin',$checkin);
-      $request->session()->put('checkout',$checkout);
+    }
+    else if(!empty($searchterm) && empty($numtravelers)) {
 
 
-//      $hotels= Hotel::with('thumbnail');
+      $hotels = Hotel::where('Name','LIKE','%'.$searchterm.'%')
+      ->orwhere('City','LIKE','%'.$searchterm.'%')
+      ->orwhere('Country','LIKE','%'.$searchterm.'%')
+      ->orwhere('Address','LIKE','%'.$searchterm.'%')
+      ->get();
+    }
+    else if (empty($searchterm) && !empty($numtravelers)){
+  //        $cb = function ($query) use($numtravelers) {
+    //        $query->where('Capacity','=',$numtravelers);
+      //    };
+        //  $hotels = Hotel::with(['rooms'=>$cb])->get();
+
+        $hotels = Hotel::whereHas('rooms',function($q) use ($numtravelers)
+        {
+          $q->where('Capacity',$numtravelers);
+        })->get();
+      
+
+
+
+    }
+    else if (!empty($searchterm) && !empty($numtravelers)) {
+      $hotels = Hotel::where('Name','LIKE','%'.$searchterm.'%')
+      ->orwhere('City','LIKE','%'.$searchterm.'%')
+      ->orwhere('Country','LIKE','%'.$searchterm.'%')
+      ->orwhere('Address','LIKE','%'.$searchterm.'%')
+      ->where('Capacity','=',$numtravelers)
+      ->get();
+    }
+
+
+    $hotels->load('thumbnail');
+    $range = explode('to',$request->daterange);
+    $checkin = date('Y-m-d',strtotime($range[0]));
+    $checkout = date('Y-m-d',strtotime($range[1]));
+
+  //  $checkin = $request->CheckInDate;
+  //  $checkout= $request->CheckOutDate;
+    $request->session()->put('checkin',$checkin);
+    $request->session()->put('checkout',$checkout);
+
+
+  //      $hotels= Hotel::with('thumbnail');
 
 
 
 
 
-      return view('hotels.allhotels' , compact('hotels'));
+    return view('hotels.allhotels' , compact('hotels'));
+
+
+
 
       }
+
+
 
       public function show(Hotel $hotel , Request $request) {
 
