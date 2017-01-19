@@ -139,6 +139,14 @@
 
       <input class="form-control" name="View" type="text"  id="viewbox">
   </div></div>
+
+  <div class="form-group row">
+    <label for="totalroombox" class="col-2 col-form-label">Number of Rooms:</label>
+    <div class="col-10">
+
+      <input class="form-control" name="TotalRooms" type="text"  id="totalroombox">
+  </div></div>
+
   <button type="submit" class="btn btn-primary">Add Room</button>
 
 </form>

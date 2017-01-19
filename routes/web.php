@@ -42,6 +42,11 @@ Route::post('hotels/{partner}/add', 'HotelsController@store');
 
 //Show all the hotels that a partner has listed
 Route::get('partners/{partner}/yourhotels', 'HotelsController@ShowHotelsByPartner');
+
+Route::get('/yourhotels/{hotel}/dashboard', 'HotelsController@ShowDash');
+
+
+Route::get('/viewreservations/{hotel}', 'PartnerController@HotelReservations');
 // Edit a specific hotels details.
 Route::get('yourhotels/edit/{hotel}', 'HotelsController@edit');
 //Update a specific hotels details.

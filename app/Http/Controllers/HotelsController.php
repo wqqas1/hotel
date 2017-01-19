@@ -15,7 +15,7 @@ class HotelsController extends Controller
       $range = explode('to',$request->daterange);
       $checkin = date('Y-m-d',strtotime($range[0]));
       $checkout = date('Y-m-d',strtotime($range[1]));
-      
+
     //  $checkin = $request->CheckInDate;
     //  $checkout= $request->CheckOutDate;
       $request->session()->put('checkin',$checkin);
@@ -138,6 +138,11 @@ class HotelsController extends Controller
 
 
                    }
+                   public function ShowDash(Hotel $hotel) {
+
+
+                         return view('partners.actions', compact('hotel'));
+                    }
 
                  public function update(Request $request, Hotel $hotel) {
 

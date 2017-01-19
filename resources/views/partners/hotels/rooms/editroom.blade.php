@@ -39,6 +39,12 @@
 
         <input class="form-control" name="View" type="text" value="{{$room->View}}" id="viewbox">
     </div></div>
+    <div class="form-group row">
+      <label for="totalroombox" class="col-2 col-form-label">Number of Rooms:</label>
+      <div class="col-10">
+
+        <input class="form-control" name="TotalRooms" type="text" value="{{$room->TotalRooms}}" id="totalroombox">
+    </div></div>
     <a class="btn btn-default pull-right" href="/yourhotels/edit/{{$room->hotel_id}}">Back</a>
     <button type="submit" class="btn btn-primary">Edit Room</button>
 

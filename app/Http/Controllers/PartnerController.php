@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Partner;
 use App\User;
+use App\Hotel;
+use App\Reservation;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
@@ -21,7 +23,7 @@ class PartnerController extends Controller
 
        public function addHotel(Partner $partner) {
 
-            
+
                 return view('partners.addhotel' , compact('partner'));
          }
 
@@ -37,4 +39,14 @@ class PartnerController extends Controller
 
 
            }
+           public function HotelReservations(Hotel $hotel, Reservation $reservation) {
+
+             $hotelid = $hotel->id;
+             $hotel = Hotel::find($hotelid);
+          $reservations = Reservation::where('hotel_id','=', $hotelid)->get();
+
+
+                  return view('partners.hotels.viewReservations' , compact('reservations','hotel'));
+
+            }
 }

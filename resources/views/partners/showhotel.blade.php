@@ -5,7 +5,7 @@
       <div class="list-group">
 
   @foreach ($hotels as $hotel)
-    <a href="/yourhotels/edit/{{$hotel->id}}" class="list-group-item">{{$hotel->Name}}</a>
+    <a href="/yourhotels/{{$hotel->id}}/dashboard" class="list-group-item">{{$hotel->Name}}</a>
 
   @endforeach
 
