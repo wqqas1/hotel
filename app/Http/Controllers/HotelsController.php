@@ -27,27 +27,29 @@ class HotelsController extends Controller
       ->get();
     }
     else if (empty($searchterm) && !empty($numtravelers)){
-  //        $cb = function ($query) use($numtravelers) {
-    //        $query->where('Capacity','=',$numtravelers);
-      //    };
-        //  $hotels = Hotel::with(['rooms'=>$cb])->get();
-
+  
         $hotels = Hotel::whereHas('rooms',function($q) use ($numtravelers)
         {
           $q->where('Capacity',$numtravelers);
         })->get();
-      
+
 
 
 
     }
     else if (!empty($searchterm) && !empty($numtravelers)) {
-      $hotels = Hotel::where('Name','LIKE','%'.$searchterm.'%')
-      ->orwhere('City','LIKE','%'.$searchterm.'%')
-      ->orwhere('Country','LIKE','%'.$searchterm.'%')
-      ->orwhere('Address','LIKE','%'.$searchterm.'%')
-      ->where('Capacity','=',$numtravelers)
-      ->get();
+      $hotels = Hotel::whereHas('rooms',function($q) use ($numtravelers)
+      {
+        $q->where('Capacity',$numtravelers);
+      })
+      ->where(function ($q2)use ($searchterm){
+        $q2->where('Name','LIKE','%'.$searchterm.'%')
+        ->orwhere('City','LIKE','%'.$searchterm.'%')
+        ->orwhere('Country','LIKE','%'.$searchterm.'%')
+        ->orwhere('Address','LIKE','%'.$searchterm.'%');
+      })
+        ->get();
+
     }
 
 
@@ -192,14 +194,17 @@ class HotelsController extends Controller
                  public function update(Request $request, Hotel $hotel) {
 
                    $hotel->update($request->all());
-                   $file=$request->file('displaypic');
+                   if (!empty($request->file('displaypic'))) {
+                     $file=$request->file('displaypic');
 
 
-                   $name = time() . $file->getClientOriginalName();
-                   $file->move('hotelphotos/photos', $name);
-                   $thumbnail = $hotel->thumbnail;
-                   $thumbnail->path = "/hotelphotos/photos/{$name}";
-                   $thumbnail->save();
+                     $name = time() . $file->getClientOriginalName();
+                     $file->move('hotelphotos/photos', $name);
+                     $thumbnail = $hotel->thumbnail;
+                     $thumbnail->path = "/hotelphotos/photos/{$name}";
+                     $thumbnail->save();
+                   }
+
                    return back();
 
                     }

@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <h1 class="text-primary">Hotel Search</h1>
-          <form method="POST"  action="/search" enctype="multipart/form-data">
+          <form method="POST"  action="/search" enctype="multipart/form-data" name="search" onsubmit="return validateForm()">
             {{ csrf_field()}}
 
           <div class="form-group">
@@ -20,7 +20,7 @@
 
               <div class="form-group">
                 <label class="text-muted" for="checkin">Please Select Your Check-In and Check-Out dates:</label>
-                <input class="date form-control" type="text" name="daterange" id="checkin"  placeholder="Select Date.." />
+                <input  class="date form-control" type="text" name="daterange" id="checkin"  placeholder="Select Date.." required>
               </div>
                 <div class="form-group">
 
@@ -53,13 +53,21 @@
   <script src="https://unpkg.com/flatpickr"></script>
 
   <script>
+
   flatpickr(".date", {
+
 	minDate: "today",
   mode:"range",
 
 });
 
-
+function validateForm() {
+  var setdate = document.forms["search"]["daterange"].value;
+  if(setdate == ""){
+    alert("Date Must be Filled Out");
+    return false;
+  }
+}
 
 
 
