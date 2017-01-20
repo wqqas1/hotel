@@ -30,6 +30,7 @@ Route::get('/search', function () {
 });
 
 
+
 Route::post('/search', 'HotelsController@index');
 
 //Show the New Hotel Page.
@@ -108,6 +109,13 @@ Route::get('/user/reservations', 'ReservationController@show');
 
 //cancel booking
 Route::get('reservations/{reservation}/cancel', 'ReservationController@destroy');
+//pdf form
+
+
+//Generate Reservation PDF
+
+
+Route::get('/reservations/{reservation}/pdf', 'ReservationController@pdfview');
 //Added For Authentication
 
 Auth::routes();

@@ -19,12 +19,14 @@
 
 
 <a class="btn btn-sm btn-danger pull-right" href="/reservations/{{$reservation->id}}/cancel">Cancel</a>
+<a  class="btn btn-sm btn-default pull-right "href="/reservations/{{$reservation->id}}/pdf">Download PDF</a>
   <h5><u> {{$reservation->room->hotel->Name}}</u></h5>
   <p><mark>Room Type :</mark> {{$reservation->room->RoomType}}.  </p>
   <p><mark>Guest Name :</mark>  {{$reservation->guestFirstName}} {{$reservation->guestlastName}}.  </p>
   <p><mark>Check-in Date :</mark> {{$reservation->CheckIn}}.  </p>
   <p><mark>Check-out Date:</mark> {{$reservation->CheckOut}}.  </p>
   <p><mark>Total Price :</mark> £{{$reservation->totalPrice}}.  </p>
+  
 
   <hr />
 @endforeach

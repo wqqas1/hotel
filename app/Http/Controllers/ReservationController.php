@@ -8,6 +8,7 @@ use App\Room;
 use App\User;
 use App\Reservation;
 use Crypt;
+use PDF;
 class ReservationController extends Controller
 {
     public function index(Hotel $hotel , Room $room , Request $request) {
@@ -87,4 +88,25 @@ class ReservationController extends Controller
 
 
           }
+
+          public function pdfview(Request $request,Reservation $reservation) {
+
+            $uid = Auth::id();
+            $id = $reservation->id;
+            $room = $reservation->room;
+            $hotel = $room->hotel;
+            $hotelphoto = $hotel->photos->first();
+            $reservation = Reservation::where('id','=',$id)->with('room')->get();
+
+
+
+
+              $pdf= PDF::loadview('pdfview', compact('reservation','hotel','hotelphoto'));
+              return $pdf->stream('pdfview.pdf');
+
+          //  return view('pdfview',compact('reservation','hotel','hotelphoto'));
+
+
+
+            }
 }
