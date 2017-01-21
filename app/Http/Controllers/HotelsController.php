@@ -118,25 +118,62 @@ class HotelsController extends Controller
 
               $roomsleft =  $roomsavailable - $result;
               $room->spaceleft = $roomsleft;
+              $reviews = $hotel->reviews;
+            if ($hotel->hasReview()) {
 
-              $uid=Auth::id();
-              $user = User::find($uid);
-              if($user->reservationDate($hotel)) {
-                $recentbooking = true;
+
+              foreach ($reviews as $review) {
+
+                $ratings[] = $review->rating;
+              }
+              $numReviews = count($ratings);
+              $total = array_sum($ratings);
+              $rating = (round($total / $numReviews));
+
+
+              if ($rating >= 80) {
+
+                $starPath = "/images/5star.png";
+              }
+              else if ($rating >=60) {
+                  $starPath = "/images/4star.png";
+              }
+              else if ($rating >=40) {
+                  $starPath = "/images/3star.png";
+              }
+              else if ($rating >=20) {
+                  $starPath = "/images/2star.png";
               }
               else {
-                $recentbooking = false;
+
+
+                $starPath = "/images/1star.png";
               }
+
+            }
+            else{
+
+
+              $starPath = "/images/NR.png";
+              $rating = "0";
+            }
+
+
+                          $uid=Auth::id();
+                          $user = User::find($uid);
+                          if($user->reservationDate($hotel)) {
+                            $recentbooking = true;
+                          }
+                          else {
+                            $recentbooking = false;
+                          }
 
 
         }
 
 
+         return view('hotels.hoteldetails', compact('hotel','photos','rating','starPath','recentbooking'));
 
-
-
-
-         return view('hotels.hoteldetails', compact('hotel','photos','recentbooking'));
 
        }
 

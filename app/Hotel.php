@@ -54,4 +54,8 @@ class Hotel extends Model
                       return $this->hasOne(HotelPhoto::class);
 
                      }
+                     public function hasReview() {
+
+                            return (bool) $this->reviews()->first();
+                          }
 }

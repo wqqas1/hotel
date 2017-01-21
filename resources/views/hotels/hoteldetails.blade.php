@@ -28,14 +28,26 @@
   </div>
 
   <div class="panel panel-body">
-    <h4>Address:</h4>
-      <p>
-        {{ $hotel->Address}}
-      </p>
-    <h4>Telephone Number:</h4>
-      <p>
-        {{ $hotel->TelephoneNumber}}
-      </p>
+
+
+      <dl class="row">
+        <dt class="col-sm-5">Check-In User Rating:</dt>
+        <dd class="col-sm-7">
+          <img src="{{$starPath}}" />
+          <b>{{$rating}}%</b>
+        </dd>
+        <dt class="col-sm-5">Address:</dt>
+          <dd class="col sm-7">
+            {{ $hotel->Address}}
+          </dd>
+        <dt class="col-sm-5">Telephone Number:</dt>
+          <dd class="col sm-7">
+            {{ $hotel->TelephoneNumber}}
+          </dd>
+
+
+    </dl>
+
   </div>
 </div>
 
