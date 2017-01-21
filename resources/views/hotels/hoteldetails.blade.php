@@ -116,6 +116,7 @@
 
 
     <textarea name="comment" class="form-control">{{ old('comment')}}</textarea>
+    <label>Star Rating:</label><input type="hidden" name="rating" class="rating" data-stop="100" data-step="20" />
     </div>
     <div class="form-group">
 
@@ -144,7 +145,9 @@
 
 @endsection
 @section('scripts')
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+  <script src="/js/bootstrap-rating.js" type="text/javascript"></script>
   <script>
 
       $('.autoplay').slick({
