@@ -100,8 +100,11 @@ class ReservationController extends Controller
 
 
 
+            $imagepath = "https://maps.googleapis.com/maps/api/staticmap?size=680x400&zoom=14&center=leeds&style=feature:all|element:all";
 
-              $pdf= PDF::loadview('pdfview', compact('reservation','hotel','hotelphoto'));
+
+
+              $pdf= PDF::loadview('pdfview', compact('reservation','hotel','hotelphoto','imagepath'));
               return $pdf->stream('pdfview.pdf');
 
           //  return view('pdfview',compact('reservation','hotel','hotelphoto'));

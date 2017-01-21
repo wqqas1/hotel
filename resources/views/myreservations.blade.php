@@ -26,7 +26,7 @@
   <p><mark>Check-in Date :</mark> {{$reservation->CheckIn}}.  </p>
   <p><mark>Check-out Date:</mark> {{$reservation->CheckOut}}.  </p>
   <p><mark>Total Price :</mark> £{{$reservation->totalPrice}}.  </p>
-  
+
 
   <hr />
 @endforeach

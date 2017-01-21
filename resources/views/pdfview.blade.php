@@ -48,13 +48,18 @@
                     <p><b>Room View:</b> {{$showdetails->room->View}}</p>
                     <p><b>Total Price:</b> £{{$showdetails->totalPrice}}</p>
                 </div>
-
-
-
-
-
-
+                  </div>
+              <div class="panel panel-default">
+                <div class="panel-heading"><h3>City Map</h3></div>
+                <div class="panel-body">
+              <img src="https://maps.googleapis.com/maps/api/staticmap?size=680x400&zoom=13&center={{$hotel->City}}&style=feature:all|element:all" />
+            </div>
+            <div class="panel-footer">Enjoy Your Stay In {{$hotel->City}} !</div>
           </div>
+
+
+
+
 
 
              </center>
