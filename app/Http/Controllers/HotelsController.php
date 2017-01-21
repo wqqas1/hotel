@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 Use Auth;
 Use App\Hotel;
 Use App\Partner;
+Use App\User;
 Use App\Room;
 use Illuminate\Http\Request;
 use App\Reservation;
@@ -27,7 +28,7 @@ class HotelsController extends Controller
       ->get();
     }
     else if (empty($searchterm) && !empty($numtravelers)){
-  
+
         $hotels = Hotel::whereHas('rooms',function($q) use ($numtravelers)
         {
           $q->where('Capacity',$numtravelers);
@@ -118,7 +119,14 @@ class HotelsController extends Controller
               $roomsleft =  $roomsavailable - $result;
               $room->spaceleft = $roomsleft;
 
-
+              $uid=Auth::id();
+              $user = User::find($uid);
+              if($user->reservationDate($hotel)) {
+                $recentbooking = true;
+              }
+              else {
+                $recentbooking = false;
+              }
 
 
         }
@@ -128,7 +136,7 @@ class HotelsController extends Controller
 
 
 
-         return view('hotels.hoteldetails', compact('hotel','photos'));
+         return view('hotels.hoteldetails', compact('hotel','photos','recentbooking'));
 
        }
 

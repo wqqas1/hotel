@@ -4,6 +4,7 @@ namespace App;
 Use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Hotel;
 
 class User extends Authenticatable
 {
@@ -64,5 +65,11 @@ class User extends Authenticatable
                 return $this->reservations()->save($reservation);
 
                }
+               public function reservationDate(Hotel $hotel) {
+
+                return (bool) $this->reservations()
+                    ->where('hotel_id','=',$hotel->id)->orderBy('created_at')->first();
+
+                 }
 
 }

@@ -54,7 +54,7 @@
       <p><mark>Price :</mark> £{{$room->Price}}  </p>
       <p>
         <b>Rooms Left: </b>{{$room->spaceleft}}</p>
-        
+
         @if ($room->spaceleft > 0)
 
           <a href="/book/{{$hotel->id}}/{{$room->id}}" class="btn btn-success">Book</a>
@@ -105,6 +105,9 @@
 </tbody>
 </table>
 <hr>
+@if ($recentbooking == true)
+
+
 <h4>Add a New Review</h4>
 <form method="POST" action="/hotels/{{$hotel->id}}/reviews">
   {{ csrf_field()}}
@@ -120,6 +123,7 @@
       <button type="submit" class="btn btn-primary">Add Review</button>
       </div>
 </form>
+@endif
   @if (count($errors))
     <ul>
       @foreach ($errors->all() as $error)
