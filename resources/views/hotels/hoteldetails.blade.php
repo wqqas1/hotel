@@ -46,6 +46,13 @@
           </dd>
 
 
+
+          <dt class="col-sm-5">Other Hotels Nearby:</dt>
+            <dd class="col sm-7">
+              <a href="/hotels/{{$Recommended->id}}">{{$Recommended->Name}}</a>
+            </dd>
+            
+
     </dl>
 
   </div>
@@ -71,6 +78,8 @@
 
           <a href="/book/{{$hotel->id}}/{{$room->id}}" class="btn btn-success">Book</a>
           <hr />
+
+
 
         @endif
 

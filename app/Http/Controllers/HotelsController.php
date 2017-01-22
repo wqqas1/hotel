@@ -118,6 +118,8 @@ class HotelsController extends Controller
 
               $roomsleft =  $roomsavailable - $result;
               $room->spaceleft = $roomsleft;
+            }
+
               $reviews = $hotel->reviews;
             if ($hotel->hasReview()) {
 
@@ -161,6 +163,7 @@ class HotelsController extends Controller
 
                           $uid=Auth::id();
                           $user = User::find($uid);
+
                           if($user->reservationDate($hotel)) {
                             $recentbooking = true;
                           }
@@ -168,11 +171,16 @@ class HotelsController extends Controller
                             $recentbooking = false;
                           }
 
+                          $city = $hotel->City;
+                          $Recommended = Hotel::inRandomOrder()->where('City','=',$city)
+                          ->where('id','!=',$hotel->id)
+                          ->first();
 
-        }
+                  
 
 
-         return view('hotels.hoteldetails', compact('hotel','photos','rating','starPath','recentbooking'));
+
+         return view('hotels.hoteldetails', compact('hotel','photos','rating','starPath','recentbooking','Recommended'));
 
 
        }
