@@ -30,6 +30,8 @@ Route::get('/search', function () {
 });
 
 
+Route::get('/partners/{partner}/graphs', 'ChartsController@index');
+
 
 Route::post('/search', 'HotelsController@index');
 

@@ -16,6 +16,7 @@
                     <div class="list-group">
                       <a href="/partners/{{$partner->id}}/yourhotels" class="list-group-item">Your Hotels</a>
                       <a href="/partners/{{$partner->id}}/newhotel" class="list-group-item">List a New Hotel</a>
+                      <a href="/partners/{{$partner->id}}/graphs" class="list-group-item">View Hotel Statistics</a>
                     </div>
                   </div>
                   <div class="panel-footel text-center">
