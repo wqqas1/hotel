@@ -44,14 +44,15 @@
           <dd class="col sm-7">
             {{ $hotel->TelephoneNumber}}
           </dd>
-
+        @unless ($Recommended == false)
 
 
           <dt class="col-sm-5">Other Hotels Nearby:</dt>
             <dd class="col sm-7">
               <a href="/hotels/{{$Recommended->id}}">{{$Recommended->Name}}</a>
             </dd>
-            
+              @endunless
+
 
     </dl>
 

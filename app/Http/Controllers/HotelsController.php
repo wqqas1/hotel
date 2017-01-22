@@ -176,7 +176,9 @@ class HotelsController extends Controller
                           ->where('id','!=',$hotel->id)
                           ->first();
 
-                  
+                          if (is_null($Recommended)) {
+                            $Recommended = false;
+                          }
 
 
 
