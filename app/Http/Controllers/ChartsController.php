@@ -8,6 +8,7 @@ Use App\Hotel;
 Use App\Reservation;
 use Carbon\Carbon;
 use App\Partner;
+use DB;
 class ChartsController extends Controller
 {
     public function index(Partner $partner)
@@ -28,7 +29,13 @@ class ChartsController extends Controller
       ->sum('totalPrice');
 
 
-      $hotelcountry = $hotels->pluck('Country');
+
+      $countryquery = DB::table('hotels')->where('partner_id','=',$partnerid)
+      ->select('Country')
+      ->GroupBy('Country')
+      ->get();
+
+      $hotelcountry = $countryquery->pluck('Country');
 
       $NumOfReserv = Reservation::whereIn('hotel_id',$hotelid)
       ->where('created_at', '>=',Carbon::now()->startOfMonth())
@@ -60,7 +67,7 @@ class ChartsController extends Controller
         $chart2 =  Charts::create('bar', 'highcharts')
             ->title('Hotels Per Country')
             ->elementLabel('Number Of Hotels')
-            ->labels($hotels->pluck('Country'))
+            ->labels($hotelcountry)
             ->values($count2)
             ->dimensions(1000,500)
             ->responsive(true);
