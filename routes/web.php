@@ -55,7 +55,13 @@ Route::post('hotels/{partner}/add', 'HotelsController@store');
 
 Route::post('/search', 'HotelsController@index');
 
+Route::get('/guestsearch', 'HotelsController@guestview');
+
 Route::get('hotels/{hotel}', 'HotelsController@show');
+
+
+
+
 
 
 //Partner- Show All the Hotels by the Partner and upon selecting one load the hotels dashboard.
@@ -100,7 +106,7 @@ Route::get('/reviews/{review}/edit', 'ReviewsController@edit');
 
 Route::patch('reviews/{review}', 'ReviewsController@update');
 
-Route::get('/reviews/{review}/destroy', 'ReviewsController@destroy');
+Route::get('/reviews/{review}/destroyreview', 'ReviewsController@destroy');
 
 
 //User- Book, Confirm , View and Cancel Bookings.

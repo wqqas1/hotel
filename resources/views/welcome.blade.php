@@ -84,8 +84,8 @@
 
                 <div class="links">
 
-                    <a href="/hotels">Hotels</a>
-                    
+                    <a href="/search">Hotels</a>
+
                 </div>
             </div>
         </div>

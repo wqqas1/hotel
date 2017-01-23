@@ -115,7 +115,7 @@
               <!-- If the User that Posted the review and the current user match , display an edit and Delete button. -->
               @if ($Review->user_id == Auth::id())
                   <td><a class="btn btn-default pull-right" href="/reviews/{{$Review->id}}/edit">Edit Review</a></td>
-                  <td><a class="btn btn-danger pull-right" href="/reviews/{{$Review->id}}/destroy">Delete Review</a></td>
+                  <td><a class="btn btn-danger pull-right" href="/reviews/{{$Review->id}}/destroyreview">Delete Review</a></td>
 
                   @else
                     <td></td>

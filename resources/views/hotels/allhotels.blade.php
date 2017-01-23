@@ -16,7 +16,15 @@
         <div class="card-block">
           <h4 class="card-Title">{{ $Hotel->Name}}</h4>
           <p class ="card-text">{{$Hotel->description}}</p>
+
+        @if (Auth::check())
           <a href="/hotels/{{$Hotel->id}}" class="btn btn-primary">View</a>
+
+        
+          @else
+                <a href="/login" class="btn btn-primary">View</a>
+
+          @endif
        </div>
     </div>
   @endforeach
