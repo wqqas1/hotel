@@ -8,70 +8,75 @@ Use App\User;
 Use App\Room;
 use Illuminate\Http\Request;
 use App\Reservation;
+
+
 class HotelsController extends Controller
 {
+
+  //Advanced Search.
   public function index(Request $request) {
-        $searchterm = $request->get('searchterm');
-        $numtravelers = $request->get('numtravelers');
+      // Gets the search term and Number of travelers.
+        $Searchterm = $request->get('searchterm');
+        $NumTravelers = $request->get('numtravelers');
 
-    if (empty($searchterm) && empty($numtravelers)) {
-      $hotels = Hotel::all();
-
-    }
-    else if(!empty($searchterm) && empty($numtravelers)) {
-
-
-      $hotels = Hotel::where('Name','LIKE','%'.$searchterm.'%')
-      ->orwhere('City','LIKE','%'.$searchterm.'%')
-      ->orwhere('Country','LIKE','%'.$searchterm.'%')
-      ->orwhere('Address','LIKE','%'.$searchterm.'%')
-      ->get();
-    }
-    else if (empty($searchterm) && !empty($numtravelers)){
-
-        $hotels = Hotel::whereHas('rooms',function($q) use ($numtravelers)
-        {
-          $q->where('Capacity',$numtravelers);
-        })->get();
-
-
-
-
-    }
-    else if (!empty($searchterm) && !empty($numtravelers)) {
-      $hotels = Hotel::whereHas('rooms',function($q) use ($numtravelers)
-      {
-        $q->where('Capacity',$numtravelers);
-      })
-      ->where(function ($q2)use ($searchterm){
-        $q2->where('Name','LIKE','%'.$searchterm.'%')
-        ->orwhere('City','LIKE','%'.$searchterm.'%')
-        ->orwhere('Country','LIKE','%'.$searchterm.'%')
-        ->orwhere('Address','LIKE','%'.$searchterm.'%');
-      })
-        ->get();
+    /* Attempts different combinations to see the Search specifics provided and finds
+     the correct hotels from these specifics.    */
+    if (empty($Searchterm) && empty($NumTravelers)) {
+      $Hotels = Hotel::all();
 
     }
 
-
-    $hotels->load('thumbnail');
-    $range = explode('to',$request->daterange);
-    $checkin = date('Y-m-d',strtotime($range[0]));
-    $checkout = date('Y-m-d',strtotime($range[1]));
-
-  //  $checkin = $request->CheckInDate;
-  //  $checkout= $request->CheckOutDate;
-    $request->session()->put('checkin',$checkin);
-    $request->session()->put('checkout',$checkout);
+        else if(!empty($Searchterm) && empty($NumTravelers)) {
 
 
-  //      $hotels= Hotel::with('thumbnail');
+          $Hotels = Hotel::where('Name','LIKE','%'.$Searchterm.'%')
+          ->orwhere('City','LIKE','%'.$Searchterm.'%')
+          ->orwhere('Country','LIKE','%'.$Searchterm.'%')
+          ->orwhere('Address','LIKE','%'.$Searchterm.'%')
+          ->get();
+        }
+
+            else if (empty($Searchterm) && !empty($NumTravelers)){
+
+                $Hotels = Hotel::whereHas('rooms',function($q) use ($NumTravelers)
+                {
+                  $q->where('Capacity',$NumTravelers);
+
+                })->get();
+              }
+
+
+                      else if (!empty($Searchterm) && !empty($NumTravelers)) {
+                        $Hotels = Hotel::whereHas('rooms',function($q) use ($NumTravelers)
+                        {
+                          $q->where('Capacity',$NumTravelers);
+
+                        })->where(function ($q2)use ($Searchterm){
+
+                                  $q2->where('Name','LIKE','%'.$Searchterm.'%')
+                                  ->orwhere('City','LIKE','%'.$Searchterm.'%')
+                                  ->orwhere('Country','LIKE','%'.$Searchterm.'%')
+                                  ->orwhere('Address','LIKE','%'.$Searchterm.'%');
+
+                                    })->get();
+
+                          }
 
 
 
+        // Splits the Date range and puts Check In and Check out into Session Variables.
+        $Hotels->load('thumbnail');
+        $Range = explode('to',$request->daterange);
+        $CheckIn = date('Y-m-d',strtotime($Range[0]));
+        $CheckOut = date('Y-m-d',strtotime($Range[1]));
 
 
-    return view('hotels.allhotels' , compact('hotels'));
+        $request->session()->put('checkin',$CheckIn);
+        $request->session()->put('checkout',$CheckOut);
+
+
+
+        return view('hotels.allhotels' , compact('Hotels'));
 
 
 
@@ -79,199 +84,216 @@ class HotelsController extends Controller
       }
 
 
-
+      // Controller to provide Hotel Details.
       public function show(Hotel $hotel , Request $request) {
 
-        //$hotel->load('reviews.user');
-        // $review = Hotel::with('reviews.user')->get();
+
         $hotel->load('reviews.user');
+        $Photos = $hotel->photos->shift();
+        $LoadReserv = $hotel->load('rooms.reservation');
+        $Rooms = $hotel->rooms;
 
-        $photos = $hotel->photos->shift();
-        $load = $hotel->load('rooms.reservation');
-        $rooms = $hotel->rooms;
-        $first = $request->session()->get('checkin');
+        // Gets the Checkin and checkout dates from the session variable
+        $FirstDate = $request->session()->get('checkin');
+        $SecDate = $request->session()->get('checkout');
 
-        $sec = $request->session()->get('checkout');
-        foreach ($rooms as $room) {
-            $id =  $room->id;
+        // Tries to match the checkin and checkout dates with other reservations of the same Hotel room
+        foreach ($Rooms as $Room) {
+            $Id =  $Room->id;
 
-            $result = Reservation::where('room_id','=', $id)
-            ->where('CheckIn','>=',$first)
-            ->where('CheckOut','<=',$sec)
-          ->orWhere(function($query) use ($first,$id)
-          {
-            $query->where('room_id','=', $id)   //
-                  ->where('CheckIn','<=',$first)
+            $RoomsBooked = Reservation::where('room_id','=', $Id)
+            ->where('CheckIn','>=',$FirstDate)
+            ->where('CheckOut','<=',$SecDate)
 
-                  ->where('CheckOut','>=',$first);
-                })
-                ->orWhere(function($query2) use ($first,$sec,$id)
-                {
-                  $query2->where('room_id','=', $id)   //
-                        ->where('CheckIn','>=',$first)
+                ->orWhere(function($query) use ($FirstDate,$Id)
+                    {
+                      $query->where('room_id','=', $Id)
+                            ->where('CheckIn','<=',$FirstDate)
 
-                        ->where('CheckIn','<=',$sec);
-                      })->count();
+                            ->where('CheckOut','>=',$FirstDate);
+                          })
 
-          //('CheckIn','<=',$first)->where('CheckOut','>=',$first)->count();
-            $roomsavailable = $room->TotalRooms;
+                            ->orWhere(function($query2) use ($FirstDate,$SecDate,$Id)
+                            {
+                              $query2->where('room_id','=', $Id)
+                                    ->where('CheckIn','>=',$FirstDate)
 
-              $roomsleft =  $roomsavailable - $result;
-              $room->spaceleft = $roomsleft;
+                                    ->where('CheckIn','<=',$SecDate);
+                                  })->count();
+
+
+                  // Works out How many rooms are available
+                  $Roomsavailable = $Room->TotalRooms;
+                  $Roomsleft =  $Roomsavailable - $RoomsBooked;
+                  $Room->spaceleft = $Roomsleft;
             }
 
-              $reviews = $hotel->reviews;
+            // Works out the rating of each hotel using the Ratings left by users.
+            $Reviews = $hotel->reviews;
             if ($hotel->hasReview()) {
 
+                    foreach ($Reviews as $Review) {
 
-              foreach ($reviews as $review) {
+                      $Ratings[] = $Review->rating;
+                    }
+              $NumReviews = count($Ratings);
+              $Total = array_sum($Ratings);
+              $Rating = (round($Total / $NumReviews));
 
-                $ratings[] = $review->rating;
-              }
-              $numReviews = count($ratings);
-              $total = array_sum($ratings);
-              $rating = (round($total / $numReviews));
-
-
-              if ($rating >= 80) {
+              //Displays the correct image depending on the rating.
+              if ($Rating >= 80) {
 
                 $starPath = "/images/5star.png";
-              }
-              else if ($rating >=60) {
-                  $starPath = "/images/4star.png";
-              }
-              else if ($rating >=40) {
-                  $starPath = "/images/3star.png";
-              }
-              else if ($rating >=20) {
-                  $starPath = "/images/2star.png";
-              }
-              else {
+                }
+                  else if ($Rating >=60) {
+                      $starPath = "/images/4star.png";
+                    }
+                    else if ($Rating >=40) {
+                        $starPath = "/images/3star.png";
+                      }
+                        else if ($Rating >=20) {
+                            $starPath = "/images/2star.png";
+                          }
+                            else {
 
 
-                $starPath = "/images/1star.png";
-              }
+                              $starPath = "/images/1star.png";
+                              }
 
             }
-            else{
+            // If No reviews have been left , the rating is 0
+                else{
 
 
-              $starPath = "/images/NR.png";
-              $rating = "0";
-            }
+                  $starPath = "/images/NR.png";
+                  $Rating = "0";
+                }
 
 
-                          $uid=Auth::id();
-                          $user = User::find($uid);
 
-                          if($user->reservationDate($hotel)) {
-                            $recentbooking = true;
-                          }
-                          else {
-                            $recentbooking = false;
-                          }
+                //Checks to see if User has booked the hotel before.
+                $UID=Auth::id();
+                $User = User::find($UID);
 
-                          $city = $hotel->City;
-                          $Recommended = Hotel::inRandomOrder()->where('City','=',$city)
-                          ->where('id','!=',$hotel->id)
-                          ->first();
+                if($User->reservationDate($hotel)) {
+                    $RecentBooking = true;
+                  }
+                    else {
+                          $RecentBooking = false;
+                      }
 
-                          if (is_null($Recommended)) {
+
+
+                // Recommends another Hotel
+                  $City = $hotel->City;
+                  $Recommended = Hotel::inRandomOrder()->where('City','=',$City)
+                  ->where('id','!=',$hotel->id)
+                  ->first();
+
+                  if (is_null($Recommended)) {
                             $Recommended = false;
                           }
 
 
 
-         return view('hotels.hoteldetails', compact('hotel','photos','rating','starPath','recentbooking','Recommended'));
+         return view('hotels.hoteldetails', compact('hotel','Photos','Rating','starPath','RecentBooking','Recommended'));
 
 
        }
 
 
-    //      public function edit(Review $review) {
-
-      //      return view('reviews.edit', compact('review'));
 
 
-      //      }
+
+            // Add a New Hotel to the Website and adds uploaded Thumbnail Photos to the website.
 
             public function store(Request $request, Hotel $hotel ,Partner $partner) {
 
 
-
-            $hotel = new Hotel;
-            $hotel->Name = $request->Name;
-            $hotel->Address = $request->Address;
-            $hotel->City = $request->City;
-            $hotel->Country= $request->Country;
-            $hotel->TelephoneNumber = $request->TelephoneNumber;
-            $hotel->ImagePath = $request->ImagePath;
-            $hotel->description = $request->description;
-
-            $partner->hotels()->save($hotel);
-            $hotelid = $hotel->id;
-            $currenthotel = Hotel::find($hotelid);
-
-            $file=$request->file('displaypic');
+              $Hotel = new Hotel;
+              $Hotel->Name = $request->Name;
+              $Hotel->Address = $request->Address;
+              $Hotel->City = $request->City;
+              $Hotel->Country= $request->Country;
+              $Hotel->TelephoneNumber = $request->TelephoneNumber;
+              $Hotel->ImagePath = $request->ImagePath;
+              $Hotel->description = $request->description;
+              $partner->hotels()->save($Hotel);
 
 
-            $name = time() . $file->getClientOriginalName();
-            $file->move('hotelphotos/photos', $name);
+              $HotelId = $Hotel->id;
+              $CurrentHotel = Hotel::find($HotelId);
+
+              $File=$request->file('displaypic');
 
 
-            $hotel->photos()->create(['path'=>"/hotelphotos/photos/{$name}"]);
-            return view('partners.hotels.addphoto', compact('currenthotel','partner'));
+              $Name = time() . $File->getClientOriginalName();
+              $File->move('hotelphotos/photos', $Name);
 
-               }
 
+              $Hotel->photos()->create(['path'=>"/hotelphotos/photos/{$Name}"]);
+              return view('partners.hotels.addphoto', compact('CurrentHotel','partner'));
+
+              }
+
+
+              // Display Only the Hotels that the Logged in Partner has added to the website.
                public function ShowHotelsByPartner(Hotel $hotel, Partner $partner) {
 
-                 $hotels = $partner->hotels;
+                 $Hotels = $partner->hotels;
 
-                 return view('partners.showhotel', compact('hotels'));
+                 return view('partners.showhotel', compact('Hotels'));
 
 
+                }
+
+                // Shows the partner A "Hotel Dashboard" , once they have selected a Hotel.
+                public function ShowDash(Hotel $hotel) {
+
+
+                      return view('partners.actions', compact('hotel'));
                  }
-                 public function edit(Hotel $hotel, Partner $partner) {
-                   $partner = $hotel->partner;
 
-                     $photos = $hotel->photos->shift();
-                   return view('partners.edithotel', compact('hotel','partner','photos'));
+                // Display the Edit Hotels Form .
+                 public function edit(Hotel $hotel, Partner $partner) {
+                   $Partner = $hotel->partner;
+
+                   $Photos = $hotel->photos->shift();
+
+                   return view('partners.edithotel', compact('hotel','Partner','Photos'));
 
 
                    }
-                   public function ShowDash(Hotel $hotel) {
 
 
-                         return view('partners.actions', compact('hotel'));
-                    }
-
+                  //Update the Database with the edited details including thubnailpath if it has been changed.
                  public function update(Request $request, Hotel $hotel) {
 
-                   $hotel->update($request->all());
-                   if (!empty($request->file('displaypic'))) {
-                     $file=$request->file('displaypic');
+                    $hotel->update($request->all());
 
+                       if (!empty($request->file('displaypic'))) {
 
-                     $name = time() . $file->getClientOriginalName();
-                     $file->move('hotelphotos/photos', $name);
-                     $thumbnail = $hotel->thumbnail;
-                     $thumbnail->path = "/hotelphotos/photos/{$name}";
-                     $thumbnail->save();
-                   }
+                          $File=$request->file('displaypic');
+                          $Name = time() . $File->getClientOriginalName();
+                          $File->move('hotelphotos/photos', $Name);
+                          $Thumbnail = $hotel->thumbnail;
+                          $Thumbnail->path = "/hotelphotos/photos/{$Name}";
+                          $Thumbnail->save();
+                       }
 
-                   return back();
+                       return back();
 
                     }
 
+                    //Deletes the Hotel.
                     public function destroy(Request $request,Hotel $hotel) {
 
 
-                        $id = $hotel->id;
-                        $currenthotel = Hotel::find($id);
+                        $Id = $hotel->id;
+                        $CurrentHotel = Hotel::find($Id);
 
-                        $currenthotel->rooms()->delete();
-                        $currenthotel->delete();
+                        $CurrentHotel->rooms()->delete();
+                        $CurrentHotel->delete();
                         return redirect('/home');
 
                      }

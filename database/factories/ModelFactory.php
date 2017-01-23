@@ -12,6 +12,8 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
+// Generates a Fake User.
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -22,6 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+// Generates a Fake Hotel.
 $factory->define(App\Hotel::class, function (Faker\Generator $faker) {
 
 

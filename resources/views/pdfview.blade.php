@@ -21,23 +21,24 @@
       <div class="col-md-6 col-md-offset-3 ">
 
         <div class="container">
-        <center>
+          <center>
+            <!-- Displays the Hotel Details -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h1>Check-In.com Reservation</h1></div>
 
-  <div class="panel panel-default">
-  <div class="panel-heading"><h1>Check-In.com Reservation</h1></div>
-
-            @foreach ($reservation as $showdetails)
-              <div class="panel-body">
+              @foreach ($reservation as $showdetails)
+                <div class="panel-body">
                   <div><img  src="{{ public_path() .$hotelphoto->path}}"></div>
 
-                <h3><b>{{$hotel->Name}}  </b></h3>
-                <p>{{$hotel->description}}</p>
-                <p>Address: {{$hotel->Address}} , {{$hotel->City}} , {{$hotel->Country}}.</p>
-                <p>Contact: {{$hotel->TelephoneNumber}}</p>
-              </div>
+                  <h3><b>{{$hotel->Name}}  </b></h3>
+                  <p>{{$hotel->description}}</p>
+                  <p>Address: {{$hotel->Address}} , {{$hotel->City}} , {{$hotel->Country}}.</p>
+                  <p>Contact: {{$hotel->TelephoneNumber}}</p>
+                </div>
             </div>
+              <!-- Displays the Booking Details such as Room name etc.. -->
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Booking Details</h3></div>
+              <div class="panel-heading"><h3>Booking Details</h3></div>
                 <div class="panel-body">
 
                    <p><b>Reference Number: </b>{{$showdetails->id}}</p>
@@ -48,28 +49,22 @@
                     <p><b>Room View:</b> {{$showdetails->room->View}}</p>
                     <p><b>Total Price:</b> £{{$showdetails->totalPrice}}</p>
                 </div>
-                  </div>
-              <div class="panel panel-default">
+            </div>
+              <!-- Uses the City that the hotel is located in to pull a map from Google-->
+            <div class="panel panel-default">
                 <div class="panel-heading"><h3>City Map</h3></div>
                 <div class="panel-body">
-              <img src="https://maps.googleapis.com/maps/api/staticmap?size=680x400&zoom=13&center={{$hotel->City}}&style=feature:all|element:all" />
+                  <img src="https://maps.googleapis.com/maps/api/staticmap?size=680x400&zoom=13&center={{$hotel->City}}&style=feature:all|element:all" />
+                </div>
+                <div class="panel-footer">Enjoy Your Stay In {{$hotel->City}} !</div>
             </div>
-            <div class="panel-footer">Enjoy Your Stay In {{$hotel->City}} !</div>
-          </div>
+
+
+            </center>
 
 
 
-
-
-
-             </center>
-
-
-
-    @endforeach
-
-
-
+          @endforeach
 
       </div>
     </div>

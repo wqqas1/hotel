@@ -26,6 +26,9 @@ class AddRatingToReviewsTable extends Migration
      */
     public function down()
     {
-
+      Schema::table('reviews', function($table)
+      {
+              $table->dropColumn('rating');
+         });
     }
 }

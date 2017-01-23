@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@unless ($usersrole->role_id ==2 )
+@unless ($UsersRole->role_id ==2 )
 
-
+<!-- Displays the Partners Dashboard -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -14,13 +14,17 @@
 
                 <div class="panel-body">
                     <div class="list-group">
-                      <a href="/partners/{{$partner->id}}/yourhotels" class="list-group-item">Your Hotels</a>
-                      <a href="/partners/{{$partner->id}}/newhotel" class="list-group-item">List a New Hotel</a>
-                      <a href="/partners/{{$partner->id}}/graphs" class="list-group-item">View Hotel Statistics</a>
+                      <a href="/partners/{{$Partner->id}}/yourhotels" class="list-group-item">Your Hotels</a>
+                      <a href="/partners/{{$Partner->id}}/newhotel" class="list-group-item">List a New Hotel</a>
+                    @if ($PartnerHotels > 0)
+
+
+                      <a href="/partners/{{$Partner->id}}/graphs" class="list-group-item">View Hotel Statistics</a>
+                    @endif
                     </div>
-                  </div>
-                  <div class="panel-footel text-center">
-                    Welcome {{$usersrole->RoleName}} - {{$partner->CompanyName}} You are logged in!  </div>
+                </div>
+                <div class="panel-footel text-center">
+                    Welcome {{$UsersRole->RoleName}} - {{$Partner->CompanyName}} You are logged in!  </div>
             </div>
         </div>
     </div>

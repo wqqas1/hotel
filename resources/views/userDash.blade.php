@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@unless ($usersrole->role_id ==2 )
+@unless ($UsersRole->role_id ==2 )
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard  |   You are logged in! {{$usersrole->RoleName}}</div>
+                <div class="panel-heading">Dashboard  |   You are logged in! {{$UsersRole->RoleName}}</div>
 
                 <div class="panel-body">
                   <div class="list-group">

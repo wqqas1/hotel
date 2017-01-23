@@ -11,14 +11,16 @@
     <title>{{ config('app.name', 'Hotels') }}</title>
 
     <!-- Styles -->
+    <!-- Styles for Bootstrap , Date Picker , Image Uploader , Slideshow and Rating. -->
     <link href="{{ elixir('css/app.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.css">
-    {!! Charts::assets() !!}
+
+    @yield('charts')
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -83,6 +85,7 @@
                 </div>
             </div>
         </nav>
+        <!-- Main Body content goes here -->
         <div class="container">
               @yield('content')
         </div>

@@ -1,24 +1,24 @@
- @extends('layouts.app')
+@extends('layouts.app')
+@section('charts')
+  {!! Charts::assets() !!}
 
- @section('content')
+@endsection
+@section('content')
 
-
+<!-- Loads all the charts from the controller onto the page -->
  <div class="container">
 
-                {!! $chart->render() !!}
-                <hr />
-                  {!! $chart2->render() !!}
-                  <hr />
-                <center>
+    {!! $chart->render() !!}
+    <hr />
+    {!! $chart2->render() !!}
+    <hr />
+    <center> <h3>Earnings</h3>  </center>
 
-                <h3>Earnings</h3>  </center>
-
-                        {!! $chart3->render() !!}
+    {!! $chart3->render() !!}
 
 
-     </div>
+</div>
 
- </div>
- </div>
+
 
  @endsection

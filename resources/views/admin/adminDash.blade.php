@@ -16,7 +16,7 @@
 
                 </div>
                 <div class="panel-footel text-center">
-                  Welcome {{$usersrole->RoleName}} - You are logged in!  </div>
+                  Welcome {{$UsersRole->RoleName}} - You are logged in!  </div>
                   </div>
             </div>
         </div>

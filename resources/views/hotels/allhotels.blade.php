@@ -6,20 +6,20 @@
       <div class="page-header">
           <h1>Check-In: <small>Find your home, away from home.</small></h1>
       </div>
+    <!-- Displays Each Hotel as a "Card" and a button to visit the hotels page. -->
+  @foreach ($Hotels as $Hotel)
 
-  @foreach ($hotels as $hotel)
-    
-    <div class="card">
+      <div class="card">
 
-      <img class="card-img-top" src="{{$hotel->thumbnail->path}}" alt="Card image">
+        <img class="card-img-top" src="{{$Hotel->thumbnail->path}}" alt="Card image">
 
-      <div class="card-block">
-        <h4 class="card-Title">{{ $hotel->Name}}</h4>
-      <p class ="card-text">{{$hotel->description}}</p>
-      <a href="/hotels/{{$hotel->id}}" class="btn btn-primary">View</a>
+        <div class="card-block">
+          <h4 class="card-Title">{{ $Hotel->Name}}</h4>
+          <p class ="card-text">{{$Hotel->description}}</p>
+          <a href="/hotels/{{$Hotel->id}}" class="btn btn-primary">View</a>
+       </div>
     </div>
-  </div>
   @endforeach
-</div>
+  </div>
 </div>
 @endsection

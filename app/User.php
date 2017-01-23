@@ -27,49 +27,56 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /* Sets the relationships between a User
+     and Roles,Proposals ,Partners , Reservations and uses the relationship to save them. */
     public function Role() {
 
-      return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class);
 
-      }
-      public function proposals() {
+    }
+
+    public function proposals() {
 
         return $this->hasOne(Proposal::class);
 
-        }
-        public function addProposal(Proposal $proposal) {
+    }
+
+    public function addProposal(Proposal $proposal) {
 
             return $this->proposals()->save($proposal);
 
-          }
+    }
 
 
 
-          public function partners() {
+    public function partners() {
 
             return $this->hasOne(Partner::class);
 
-            }
+    }
 
-            public function addPartner(Partner $partner) {
+    public function addPartner(Partner $partner) {
 
-              return  $this->partners()->save($partner);
-            }
-            public function reservations() {
+            return  $this->partners()->save($partner);
 
-              return $this->hasMany(Reservation::class);
+    }
+    public function reservations() {
 
-            }
-            public function addReservation(Reservation $reservation) {
+            return $this->hasMany(Reservation::class);
 
-                return $this->reservations()->save($reservation);
+    }
+    public function addReservation(Reservation $reservation) {
 
-               }
-               public function reservationDate(Hotel $hotel) {
+            return $this->reservations()->save($reservation);
 
-                return (bool) $this->reservations()
-                    ->where('hotel_id','=',$hotel->id)->orderBy('created_at')->first();
+    }
 
-                 }
+    //Returns whether the user has a reservation for this hotel or not.
+    public function reservationDate(Hotel $hotel) {
+
+           return (bool) $this->reservations()
+           ->where('hotel_id','=',$hotel->id)->orderBy('created_at')->first();
+
+    }
 
 }

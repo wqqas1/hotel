@@ -11,30 +11,32 @@ use Crypt;
 use PDF;
 class ReservationController extends Controller
 {
+    //Shows the User their Reservation Details before confirmation.
     public function index(Hotel $hotel , Room $room , Request $request) {
 
       if (Auth::check()) {
 
-        $uid = Auth::id();
-        $first = $request->session()->get('checkin');
+        $UID = Auth::id();
+        $FirstDate = $request->session()->get('checkin');
 
-        $sec = $request->session()->get('checkout');
+        $SecDate = $request->session()->get('checkout');
 
-        $checkin = strtotime($first);
-        $checkInStr = date('F jS Y',$checkin);
+        $CheckIn = strtotime($FirstDate);
+        $CheckInStr = date('F jS Y',$CheckIn);
 
-        $checkout = strtotime($sec);
-        $checkOutStr = date('F jS Y',$checkout);
-        $difference = strtotime($sec) - strtotime($first);
-        $stayduration = $difference/86400;
+        $CheckOut = strtotime($SecDate);
+        $CheckOutStr = date('F jS Y',$CheckOut);
 
-        $price = $room->Price;
-        $totalcost = $stayduration * $price;
+        $Difference = strtotime($SecDate) - strtotime($FirstDate);
+        $StayDuration = $Difference/86400;
 
-        $protectedCost = Crypt::encrypt($totalcost);
+        $Price = $room->Price;
+        $TotalCost = $StayDuration * $Price;
+
+        $ProtectedCost = Crypt::encrypt($TotalCost);
 
 
-        return view('hotels.booking', compact('hotel','room','checkInStr','first','sec','checkOutStr','stayduration','totalcost','protectedCost','uid'));
+        return view('hotels.booking', compact('hotel','room','CheckInStr','CheckOutStr','FirstDate','SecDate','StayDuration','TotalCost','ProtectedCost','UID'));
       }
       else {
         return redirect ('/login');

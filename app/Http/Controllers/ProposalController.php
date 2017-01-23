@@ -9,73 +9,57 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
 
-  public function index(Proposal $proposal) {
+    // Checks to see if a user has pending proposals and Shows them the Proposal form.
+    public function index(Proposal $proposal) {
 
 
-    $userid = Auth::id();
-    $user = User::find($userid);
-    $user->load('proposals');
+        $UserId = Auth::id();
+        $User = User::find($UserId);
+        $User->load('proposals');
 
-    return view('apply.becomePartner',compact('user'));
+        return view('apply.becomePartner',compact('User'));
 
+        }
 
+    // Stores the Submitted Proposal in the database.
+    public function store(Request $request, User $user) {
 
-      }
-  public function store(Request $request, User $user) {
+            $user->addProposal(
 
-
-//  $proposal = new Proposal($request->all());
-
-
-//  $proposal->user_id = Auth::id();
-  //  $proposal->save();
-//  $user->proposals()->save($proposal);
+                      new Proposal($request->all())    );
 
 
-
-      $user->addProposal(
-    
-        new Proposal($request->all())
-
-      );
-
-
-    return view('apply.aftersubmit', compact('request'));
-     }
-
-     public function show(Proposal $proposal) {
-
-       //$hotel->load('reviews.user');
-       // $review = Hotel::with('reviews.user')->get();
-       $proposals = Proposal::all();
+          return view('apply.aftersubmit', compact('request'));
+       }
 
 
 
+    public function show(Proposal $proposal) {
 
+          $Proposals = Proposal::all();
 
-         return view('admin.PartnerRequests', compact('proposals'));
+          return view('admin.PartnerRequests', compact('Proposals'));
 
-      }
-      public function destroy(Request $request, Proposal $proposal) {
-
-        $id = $proposal->id;
-        $proposal = $proposal->find($id);
-        $proposal->delete();
-
-      //  return $review;
-      //  $review = $review->find($id);
-        return back();
-
-          }
-
-          public function status(Proposal $proposal, user $user) {
-
-
-            $user->load('proposals');
+        }
 
 
 
-              return view('apply.status', compact('user'));
+        // Removes the Proposal
+    public function destroy(Request $request, Proposal $proposal) {
 
-            }
+          $Id = $proposal->id;
+          $Proposal = $proposal->find($Id);
+          $Proposal->delete();
+
+          return back();
+
+        }
+
+    public function status(Proposal $proposal, user $user) {
+
+          $user->load('proposals');
+
+          return view('apply.status', compact('user'));
+
+        }
 }

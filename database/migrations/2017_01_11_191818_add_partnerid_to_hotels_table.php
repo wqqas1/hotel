@@ -28,7 +28,10 @@ class AddPartneridToHotelsTable extends Migration
      */
     public function down()
     {
-      $table->dropForeign('hotels_partner_id_foreign');
-      $table->dropColumn('partner_id');
+      Schema::table('hotels', function($table)
+      {
+        $table->dropForeign('hotels_partner_id_foreign');
+        $table->dropColumn('partner_id'); });
+
     }
 }

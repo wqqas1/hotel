@@ -18,6 +18,6 @@
 
         @endif
 
-<a href="/home" class="btn">Back to Dashboard.</a>
+ <a href="/home" class="btn">Back to Dashboard.</a>
 
 @endsection

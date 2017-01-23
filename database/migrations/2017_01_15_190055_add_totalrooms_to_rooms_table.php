@@ -26,6 +26,10 @@ class AddTotalroomsToRoomsTable extends Migration
      */
     public function down()
     {
-          $table->dropColumn('TotalRooms');
+      Schema::table('rooms', function($table)
+      {
+              $table->dropColumn('TotalRooms');
+         });
+
     }
 }

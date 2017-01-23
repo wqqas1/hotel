@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<!-- Shows the hotel dashboard allowing the  partner to select what they wish to do.-->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -14,17 +14,14 @@
                   <div class="list-group">
                     <a href="/viewreservations/{{$hotel->id}}" class="list-group-item">View Reservations</a>
                     <a href="/yourhotels/edit/{{$hotel->id}}" class="list-group-item">Edit Hotel</a>
+                  </div>
                 </div>
+              <hr>
             </div>
-            <hr>
 
+          </div>
 
-
-        </div>
-
-    </div>
-
-</div>
+   </div>
 </div>
 
 @endsection

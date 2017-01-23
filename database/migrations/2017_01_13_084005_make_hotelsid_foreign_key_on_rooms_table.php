@@ -26,6 +26,10 @@ class MakeHotelsidForeignKeyOnRoomsTable extends Migration
      */
     public function down()
     {
-        $table->dropForeign('rooms_hotel_id_foreign');
+      Schema::table('rooms', function($table)
+      {
+          $table->dropForeign('rooms_hotel_id_foreign');
+         });
+
     }
 }

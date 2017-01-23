@@ -8,49 +8,51 @@ use Illuminate\Http\Request;
 
 class ReviewsController extends Controller
 {
+    // Validates and Adds a new Review
     public function store(Request $request, Hotel $hotel) {
 
 
-    //  $review = new Review;
-    //  $review->comment = $request->comment;
-    //  $hotel->reviews()->save($review);
-    $this->validate($request, [
-      'comment' => 'required|min:4'
-    ]);
-    $review = new Review($request->all());
-    $review->user_id = Auth::id();
 
-      $hotel->addReview($review);
+        $this->validate($request, [
+          'comment' => 'required|min:4' ]);
 
-      return back();
-       }
+        $Review = new Review($request->all());
+        $Review->user_id = Auth::id();
 
-       public function edit(Review $review) {
+        $hotel->addReview($Review);
 
-         return view('reviews.edit', compact('review'));
+        return back();
+    }
 
 
-         }
+    public function edit(Review $review) {
 
-         public function update(Request $request, Review $review) {
-           $this->validate($request, [
-             'comment' => 'required|min:4'
-           ]);
-           $review->update($request->all());
-           return back();
+      return view('reviews.edit', compact('review'));
 
-            }
 
-            public function destroy(Request $request, Review $review) {
-          //    $review =  $review->id;
-          //    $review->delete();
-              $id = $review->id;
-              $review = $review->find($id);
-              $review->delete();
+    }
 
-            //  return $review;
-            //  $review = $review->find($id);
-              return back();
+    // Updates the Review database with specifics edited by the user.
+    public function update(Request $request, Review $review) {
 
-                }
+       $this->validate($request, [
+          'comment' => 'required|min:4' ]);
+
+       $review->update($request->all());
+
+       return back();
+
+      }
+
+    //Deletes the selected Review.
+    public function destroy(Request $request, Review $review) {
+
+        $Id = $review->id;
+        $Review = $review->find($Id);
+        $Review->delete();
+
+
+        return back();
+
+      }
 }
