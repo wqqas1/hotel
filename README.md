@@ -14,12 +14,13 @@ Hotel Website.
 10. Ability to Delete a Room.
 11. Authorization
 # Authorization features : 
-Roles - Each User has a " Role " , The default role is "user" who can see the "user dashboard".
+Roles:  Each User has a " Role " , the default role is "user" who can see the "user dashboard".
+
 A User can click the " Become a Partner" button to submit their partner application which will be reviewed by an admin.
-An admin can review Partner Applications and Decide whether to refuse ( delete the application ) or accept the user as a partner.
+An admin can review Partner Applications and decide whether to refuse ( delete the application ) or accept the user as a partner.
 Once accepted a normal user will be upgraded to a partner account and will be able to use the partner dashboard.
 
-# rooms
+# Rooms
 
 Each hotel has many room choices with differences in max occupents , beds provided , views and prices.
 
