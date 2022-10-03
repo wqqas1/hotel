@@ -11,7 +11,7 @@ Hotel Website.
 7. View all Reviews about a specific Hotel.
 8. View Rooms Provided by a Hotel and the Rooms Details.
 9. Ability to Edit a Room.
-10. Ability to Delete a Room.
+10. Ability to Delete a Room that you have booked.
 11. Authorization
 # Authorization features : 
 Roles:  Each User has a " Role " , the default role is "user" who can see the "user dashboard".
